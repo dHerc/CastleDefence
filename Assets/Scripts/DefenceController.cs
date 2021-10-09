@@ -10,10 +10,11 @@ public class DefenceController : MonoBehaviour
 
     private Color color;
     private GameObject building;
+    private GameController controller;
 
     void Start()
     {
-
+        controller = gameObject.GetComponent<GameController>();
     }
 
     void Update()
@@ -51,19 +52,37 @@ public class DefenceController : MonoBehaviour
             }
             if (building)
             {
+                if (building.GetComponent<Building>().inside == null)
+                {
                     if (Input.GetKeyDown(KeyCode.A))
                     {
-                        Instantiate(army, building.transform);
+                        controller.builder.AddDefence(army, building, Defence.Defences.Army, 1);
                     }
                     if (Input.GetKeyDown(KeyCode.L))
                     {
-                        Instantiate(archer, building.transform);
+                        controller.builder.AddDefence(archer, building, Defence.Defences.Archer, 1);
                     }
                     if (Input.GetKeyDown(KeyCode.B))
                     {
-                        Instantiate(barrel, building.transform);
+                        controller.builder.AddDefence(barrel, building, Defence.Defences.Barrel, 1);
                     }
+                }
             }
+        }
+    }
+    public void AddDefence(DefenceSave save, GameObject parent)
+    {
+        if (save.type == Defence.Defences.Army)
+        {
+            controller.builder.AddDefence(army, parent, save.type, save.level);
+        }
+        if (save.type == Defence.Defences.Archer)
+        {
+            controller.builder.AddDefence(archer, parent, save.type, save.level);
+        }
+        if (save.type == Defence.Defences.Barrel)
+        {
+            controller.builder.AddDefence(barrel, parent, save.type, save.level);
         }
     }
 }

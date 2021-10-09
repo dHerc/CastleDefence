@@ -383,6 +383,8 @@ GameObject:
   - component: {fileID: 1910582856}
   - component: {fileID: 1910582857}
   - component: {fileID: 1910582858}
+  - component: {fileID: 1910582859}
+  - component: {fileID: 1910582860}
   m_Layer: 9
   m_Name: Castle
   m_TagString: Untagged
@@ -422,6 +424,8 @@ MonoBehaviour:
     type: 3}
   GatePrefab: {fileID: 3239258023804131871, guid: 693ee61f53563ed43ae545badabf3f93,
     type: 3}
+  towerHealth: 0
+  wallHealth: 0
   Size: 1
 --- !u!114 &1910582858
 MonoBehaviour:
@@ -438,3 +442,28 @@ MonoBehaviour:
   archer: {fileID: 3783085021451848090, guid: 226f974f1121cd94c9c613362ea27c28, type: 3}
   army: {fileID: 8822147539986221436, guid: 47adedddd7558584e96a1db82aa12bd7, type: 3}
   barrel: {fileID: 88430055166544783, guid: f600cc1582240794dbf305bb28c5ada2, type: 3}
+--- !u!114 &1910582859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1910582855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9ffa84c576e391409fa83ea5aff9090, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wallHealth: 100
+--- !u!114 &1910582860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1910582855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8992c7e76ebcf274386cff4ebd4e4728, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
