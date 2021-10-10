@@ -427,6 +427,7 @@ MonoBehaviour:
   towerHealth: 0
   wallHealth: 0
   Size: 1
+  healthPerLevel: 100
 --- !u!114 &1910582858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -455,6 +456,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wallHealth: 100
+  builder: {fileID: 0}
+  shouldSave: 0
+  shouldLoad: 0
+  maxWallId: 0
 --- !u!114 &1910582860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -467,3 +472,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8992c7e76ebcf274386cff4ebd4e4728, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controller: {fileID: 0}

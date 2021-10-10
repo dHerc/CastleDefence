@@ -15,6 +15,7 @@ public class Building : MonoBehaviour
     public int level;
     public float maxHealth;
     public float health;
+    public List<int> wallIds;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +32,32 @@ public class Building : MonoBehaviour
         }
     }
 
+    public void Destroy(bool first = true)
+    {
+        if (first)
+        {
+            var walls = FindObjectsOfType<Building>();
+            foreach (var wall in walls)
+            {
+                if (wall.type == Types.Wall || wall.type == Types.Gate)
+                {
+                    if (wallIds.Contains(wall.wallIds[0]))
+                    {
+                        wall.Destroy(false);
+                    }
+                }
+                else if(wall!=this)
+                {
+                    foreach (var id in wallIds)
+                    {
+                        wall.wallIds.Remove(id);
+                    }
+                }
+            }
+        }
+        GameObject.Destroy(gameObject);
+    }
+
     public BuildingSave Serialize()
     {
         BuildingSave save = new BuildingSave();
@@ -38,11 +65,12 @@ public class Building : MonoBehaviour
         save.level = level;
         save.health = health;
         save.position = position;
-        save.rotation = rotation;
+        save.rotation = rotation.eulerAngles;
         if (inside)
             save.defence = inside.GetComponent<Defence>().Serialize();
         else
             save.defence = new DefenceSave();
+        save.wallIds = wallIds;
         return save;
     }
 }

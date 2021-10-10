@@ -18,9 +18,9 @@ public class Builder : MonoBehaviour
         
     }
 
-    public GameObject Build(GameObject prefab, Vector3 position,Building.Types type, float health, float maxHealth, int level)
+    public GameObject Build(GameObject prefab, Vector3 position, Vector3 rotation, Building.Types type, float health, float maxHealth, int level)
     {
-        var building = Instantiate(prefab, position, Quaternion.identity);
+        var building = Instantiate(prefab, position, Quaternion.Euler(rotation));
         building.layer = 9;
         var data = building.GetComponent<Building>();
         data.maxHealth = maxHealth;

@@ -9,6 +9,7 @@ public class BuildingSave
     public int level;
     public float health;
     public Vector3 position;
-    public Quaternion rotation;
+    public Vector3 rotation;
     public DefenceSave defence;
+    public List<int> wallIds;
 }

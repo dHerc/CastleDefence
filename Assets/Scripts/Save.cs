@@ -5,6 +5,7 @@ using UnityEngine;
 public class Save
 {
     public int wave;
+    public int maxWllId;
     public List<BuildingSave> buildings;
     public Save()
     {

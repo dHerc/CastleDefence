@@ -16,6 +16,8 @@ public class BuildingController : MonoBehaviour
 
     private GameController controller;
 
+    public int healthPerLevel;
+
     void Start()
     {
         controller = gameObject.GetComponent<GameController>();
@@ -36,11 +38,11 @@ public class BuildingController : MonoBehaviour
             {
                 if (hit.collider.gameObject.layer == 9)
                 {
-                    Destroy(hit.collider.gameObject);
+                    hit.collider.gameObject.GetComponent<Building>().Destroy();
                 }
                 else
                 {
-                    controller.builder.Build(TowerPrefab, position, Building.Types.Tower, towerHealth, 100, 1);
+                    controller.builder.Build(TowerPrefab, position, new Vector3(0,0,0), Building.Types.Tower, towerHealth, healthPerLevel, 1);
                 }
                 //wall.transform.rotation = Quaternion.Euler(new Vector3(-90, 0, 0));
                 //wall.transform.position = new Vector3(wall.transform.position.x, 5, wall.transform.position.z);
@@ -52,15 +54,18 @@ public class BuildingController : MonoBehaviour
         GameObject building = null;
         if (save.type == Building.Types.Tower)
         {
-            building = controller.builder.Build(TowerPrefab, save.position, Building.Types.Tower, save.health, save.level * 100, save.level);
+            building = controller.builder.Build(TowerPrefab, save.position, save.rotation, Building.Types.Tower, save.health, save.level * healthPerLevel, save.level);
+            building.GetComponent<Building>().wallIds = save.wallIds;
         }
         if (save.type == Building.Types.Wall)
         {
-            building = controller.builder.Build(WallPrefab, save.position, Building.Types.Wall, save.health, save.level * 100, save.level);
+            building = controller.builder.Build(WallPrefab, save.position, save.rotation, Building.Types.Wall, save.health, save.level * healthPerLevel, save.level);
+            building.GetComponent<Building>().wallIds = save.wallIds;
         }
         if (save.type == Building.Types.Gate)
         {
-            building = controller.builder.Build(GatePrefab, save.position, Building.Types.Gate, save.health, save.level * 100, save.level);
+            building = controller.builder.Build(GatePrefab, save.position, save.rotation, Building.Types.Gate, save.health, save.level * healthPerLevel, save.level);
+            building.GetComponent<Building>().wallIds = save.wallIds;
         }
         DefenceSave defence = save.defence;
         if(building != null && defence != null)
@@ -68,5 +73,10 @@ public class BuildingController : MonoBehaviour
             GetComponent<DefenceController>().AddDefence(defence, building);
         }
 
+    }
+
+    public void BuildWall(Vector3 position, Vector3 rotation)
+    {
+        controller.builder.Build(WallPrefab, position + new Vector3(0,0.5f,0), rotation, Building.Types.Wall, healthPerLevel, healthPerLevel, 1).GetComponent<Building>().wallIds.Add(controller.maxWallId);
     }
 }

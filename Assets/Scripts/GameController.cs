@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour
     public Builder builder;
     public bool shouldSave;
     public bool shouldLoad;
+    public int maxWallId = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +45,7 @@ public class GameController : MonoBehaviour
     {
         Save save = new Save();
         save.wave = wave;
+        save.maxWllId = maxWallId;
         foreach(var building in buildings)
         {
             save.buildings.Add(building.Serialize());
@@ -59,6 +61,7 @@ public class GameController : MonoBehaviour
         var json = PlayerPrefs.GetString("save");
         Save save = JsonUtility.FromJson<Save>(json);
         wave = save.wave;
+        maxWallId = save.maxWllId;
         foreach(var building in save.buildings)
         {
             GetComponent<BuildingController>().Build(building);

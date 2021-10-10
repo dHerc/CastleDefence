@@ -30,4 +30,9 @@ public class Defence : MonoBehaviour
         save.level = level;
         return save;
     }
+
+    public void Trigger()
+    {
+        Debug.Log("triggered");
+    }
 }
