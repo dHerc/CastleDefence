@@ -1,12 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class GameController : MonoBehaviour
-{
+{   
+    public EnemyController enemyController;
+    public Text textOnButton;
     [SerializeField] private int wallHealth;
     private int wave;
-    private List<Building> buildings;
+    public bool isAttack;
+    public List<Building> buildings;
     public Builder builder;
     public bool shouldSave;
     public bool shouldLoad;
@@ -19,6 +24,7 @@ public class GameController : MonoBehaviour
         builder = gameObject.GetComponent<Builder>();
         builder.controller = this;
         buildings = new List<Building>();
+        isAttack=false;
     }
 
     // Update is called once per frame
@@ -65,6 +71,25 @@ public class GameController : MonoBehaviour
         foreach(var building in save.buildings)
         {
             GetComponent<BuildingController>().Build(building);
+        }
+    }
+
+    public void switchMode()
+    {
+        if(isAttack)
+        {
+            shouldSave = true;
+            isAttack=false;
+            textOnButton.text="Szturm";
+            enemyController.destroyEnemies();
+
+        }
+        else
+        {
+            shouldSave = true;
+            isAttack =true;
+            textOnButton.text="Budowa";
+            enemyController.spawnEnemies();
         }
     }
 }

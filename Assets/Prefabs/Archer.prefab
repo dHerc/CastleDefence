@@ -68,7 +68,7 @@ MonoBehaviour:
   turnSpeed: 10
   bulletPrefab: {fileID: 5059807405103475129, guid: ffda51608668e4743a43f595b8f18b0c,
     type: 3}
-  firePoint: {fileID: 0}
+  firePoint: {fileID: 6204895369043543871}
 --- !u!114 &3153657924262845162
 MonoBehaviour:
   m_ObjectHideFlags: 0
