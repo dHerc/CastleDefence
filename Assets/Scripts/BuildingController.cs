@@ -77,6 +77,6 @@ public class BuildingController : MonoBehaviour
 
     public void BuildWall(Vector3 position, Vector3 rotation)
     {
-        controller.builder.Build(WallPrefab, position + new Vector3(0,0.5f,0), rotation, Building.Types.Wall, healthPerLevel, healthPerLevel, 1).GetComponent<Building>().wallIds.Add(controller.maxWallId);
+        controller.builder.Build(WallPrefab, position, rotation, Building.Types.Wall, healthPerLevel, healthPerLevel, 1).GetComponent<Building>().wallIds.Add(controller.maxWallId);
     }
 }

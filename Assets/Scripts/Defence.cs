@@ -7,7 +7,7 @@ public class Defence : MonoBehaviour
 {
     public bool active = false;
     [Serializable]
-    public enum Defences { None, Army, Archer, Barrel };
+    public enum Defences { None, Turret, Archer, Barrel };
     public Defences type;
     public int level;
 
