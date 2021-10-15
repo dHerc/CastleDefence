@@ -23,9 +23,9 @@ public class DefenceController : MonoBehaviour
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out hit, 1<<9))
+        if (Physics.Raycast(ray, out hit, 1<<9) && !controller.isAttack)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) )
             {
                 if (hit.collider.gameObject.layer == 9)
                 {
@@ -102,6 +102,13 @@ public class DefenceController : MonoBehaviour
                 }
             }
         }
+        if(controller.isAttack)
+        {
+            foreach(Building building in controller.buildings)
+            {
+                building.GetComponentInChildren<Renderer>().material.color=color;
+            }
+        }
     }
     public void AddDefence(DefenceSave save, GameObject parent)
     {
@@ -164,7 +171,7 @@ public class DefenceController : MonoBehaviour
             }
             for (float i = start.z + size; i < end.z; i++)
             {
-                float height = start.y + (end.y - start.y) * ((i - start.z) / (end.z - i));
+                float height = start.y + (end.y - start.y) * ((i - start.z) / (end.z - i)) / (end.z - start.z);
                 buildingController.BuildWall(new Vector3(start.x, height, i), new Vector3(0, 90, 0));
             }
         }

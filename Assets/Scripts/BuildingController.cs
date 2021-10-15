@@ -34,7 +34,7 @@ public class BuildingController : MonoBehaviour
             position.x = Mathf.Round(target.x / Size) * Size;
             position.y = target.y;
             position.z = Mathf.Round(target.z / Size) * Size;
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetMouseButtonDown(1) && !controller.isAttack)
             {
                 if (hit.collider.gameObject.layer == 9)
                 {
