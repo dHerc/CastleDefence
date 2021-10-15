@@ -85,9 +85,4 @@ public class Turret : MonoBehaviour
 		}
 		Debug.Log("SHOOT!");
 	}
-
-
-
-
-
 }

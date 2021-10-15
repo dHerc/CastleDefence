@@ -5,7 +5,7 @@ using UnityEngine;
 public class DefenceController : MonoBehaviour
 {
     [SerializeField] private GameObject archer;
-    [SerializeField] private GameObject army;
+    [SerializeField] private GameObject turret;
     [SerializeField] private GameObject barrel;
 
     private Color color;
@@ -78,7 +78,7 @@ public class DefenceController : MonoBehaviour
                 {
                     if (Input.GetKeyDown(KeyCode.A))
                     {
-                        controller.builder.AddDefence(army, building, Defence.Defences.Army, 1);
+                        controller.builder.AddDefence(turret, building, Defence.Defences.Turret, 1);
                     }
                     if (Input.GetKeyDown(KeyCode.L))
                     {
@@ -112,9 +112,9 @@ public class DefenceController : MonoBehaviour
     }
     public void AddDefence(DefenceSave save, GameObject parent)
     {
-        if (save.type == Defence.Defences.Army)
+        if (save.type == Defence.Defences.Turret)
         {
-            controller.builder.AddDefence(army, parent, save.type, save.level);
+            controller.builder.AddDefence(turret, parent, save.type, save.level);
         }
         if (save.type == Defence.Defences.Archer)
         {
