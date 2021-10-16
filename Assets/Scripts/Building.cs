@@ -34,6 +34,8 @@ public class Building : MonoBehaviour
 
     public void Destroy(bool first = true)
     {
+        var controller = FindObjectOfType<GameController>();
+        controller.buildings.Remove(this);
         if (first)
         {
             var walls = FindObjectsOfType<Building>();
