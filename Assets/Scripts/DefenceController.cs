@@ -5,7 +5,7 @@ using UnityEngine;
 public class DefenceController : MonoBehaviour
 {
     [SerializeField] private GameObject archer;
-    [SerializeField] private GameObject army;
+    [SerializeField] private GameObject turret;
     [SerializeField] private GameObject barrel;
 
     private Color color;
@@ -23,9 +23,9 @@ public class DefenceController : MonoBehaviour
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out hit, 1<<9) && !controller.isAttack)
+        if (Physics.Raycast(ray, out hit, 1 << 9) && !controller.isAttack)
         {
-            if (Input.GetMouseButtonDown(0) )
+            if (Input.GetMouseButtonDown(0))
             {
                 if (hit.collider.gameObject.layer == 9)
                 {
@@ -34,11 +34,11 @@ public class DefenceController : MonoBehaviour
                         if (!building.Equals(hit.collider.gameObject))
                         {
                             building.GetComponentInChildren<Renderer>().material.color = color;
-                            
+
                             if (buildingWall && building.GetComponent<Building>().type == Building.Types.Tower && hit.collider.gameObject.GetComponent<Building>().type == Building.Types.Tower)
                             {
                                 var nextBuilding = hit.collider.gameObject;
-                                if(building.transform.position.x == nextBuilding.transform.position.x)
+                                if (building.transform.position.x == nextBuilding.transform.position.x)
                                 {
                                     BuildWall(building.transform.position, nextBuilding.transform.position, false);
                                 }
@@ -46,8 +46,8 @@ public class DefenceController : MonoBehaviour
                                 {
                                     BuildWall(building.transform.position, nextBuilding.transform.position, true);
                                 }
-                                building.GetComponent<Building>().wallIds.Add(controller.maxWallId-1);
-                                nextBuilding.GetComponent<Building>().wallIds.Add(controller.maxWallId-1);
+                                building.GetComponent<Building>().wallIds.Add(controller.maxWallId - 1);
+                                nextBuilding.GetComponent<Building>().wallIds.Add(controller.maxWallId - 1);
                                 buildingWall = false;
                                 building = null;
                             }
@@ -78,7 +78,7 @@ public class DefenceController : MonoBehaviour
                 {
                     if (Input.GetKeyDown(KeyCode.A))
                     {
-                        controller.builder.AddDefence(army, building, Defence.Defences.Army, 1);
+                        controller.builder.AddDefence(turret, building, Defence.Defences.Turret, 1);
                     }
                     if (Input.GetKeyDown(KeyCode.L))
                     {
@@ -102,19 +102,19 @@ public class DefenceController : MonoBehaviour
                 }
             }
         }
-        if(controller.isAttack)
+        if (controller.isAttack)
         {
-            foreach(Building building in controller.buildings)
+            foreach (Building building in controller.buildings)
             {
-                building.GetComponentInChildren<Renderer>().material.color=color;
+                building.GetComponentInChildren<Renderer>().material.color = color;
             }
         }
     }
     public void AddDefence(DefenceSave save, GameObject parent)
     {
-        if (save.type == Defence.Defences.Army)
+        if (save.type == Defence.Defences.Turret)
         {
-            controller.builder.AddDefence(army, parent, save.type, save.level);
+            controller.builder.AddDefence(turret, parent, save.type, save.level);
         }
         if (save.type == Defence.Defences.Archer)
         {
@@ -142,23 +142,23 @@ public class DefenceController : MonoBehaviour
             test.z -= size;
         else
             test.z += size;
-        test.y+=2;
-        if (Physics.SphereCast(test, size/3, new Vector3(0,-1,0), out hit, 3f, 1 << 9))
+        test.y += 2;
+        if (Physics.SphereCast(test, size / 3, new Vector3(0, -1, 0), out hit, 3f, 1 << 9))
         {
             return;
         }
-        if(alongX)
+        if (alongX)
         {
-            if(start.x>end.x)
+            if (start.x > end.x)
             {
                 var tmp = start;
                 start = end;
                 end = tmp;
             }
-            for(float i = start.x + size; i < end.x; i++)
+            for (float i = start.x + size; i < end.x; i++)
             {
                 float height = start.y + (end.y - start.y) * ((i - start.x) / (end.x - i)) / (end.x - start.x);
-                buildingController.BuildWall(new Vector3(i, height, start.z), new Vector3(0,0,0));
+                buildingController.BuildWall(new Vector3(i, height, start.z), new Vector3(0, 0, 0));
             }
         }
         else

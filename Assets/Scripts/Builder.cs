@@ -34,7 +34,11 @@ public class Builder : MonoBehaviour
     public void AddDefence(GameObject prefab, GameObject parent, Defence.Defences type, int level)
     {
         var info = parent.GetComponent<Building>();
-        info.inside = Instantiate(prefab, parent.transform);
+        var size = parent.GetComponent<Collider>().bounds.size;
+        var top = parent.transform.position.y + size.y / 2 + 0.1f;
+        var position = new Vector3(parent.transform.position.x, top, parent.transform.position.z);
+        info.inside = Instantiate(prefab, position, Quaternion.identity);
+        info.inside.transform.parent = parent.transform;
         info.inside.GetComponent<Defence>().type = type;
         info.inside.GetComponent<Defence>().level = level;
     }

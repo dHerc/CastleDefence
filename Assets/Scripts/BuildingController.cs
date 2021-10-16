@@ -34,7 +34,7 @@ public class BuildingController : MonoBehaviour
             position.x = Mathf.Round(target.x / Size) * Size;
             position.y = target.y;
             position.z = Mathf.Round(target.z / Size) * Size;
-            if (Input.GetMouseButtonDown(1) && !controller.isAttack)
+            if (Input.GetMouseButtonDown(1))
             {
                 if (hit.collider.gameObject.layer == 9)
                 {
@@ -77,6 +77,6 @@ public class BuildingController : MonoBehaviour
 
     public void BuildWall(Vector3 position, Vector3 rotation)
     {
-        controller.builder.Build(WallPrefab, position + new Vector3(0,0.5f,0), rotation, Building.Types.Wall, healthPerLevel, healthPerLevel, 1).GetComponent<Building>().wallIds.Add(controller.maxWallId);
+        controller.builder.Build(WallPrefab, position, rotation, Building.Types.Wall, healthPerLevel, healthPerLevel, 1).GetComponent<Building>().wallIds.Add(controller.maxWallId);
     }
 }
