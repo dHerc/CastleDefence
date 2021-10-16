@@ -433,6 +433,13 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 743869201430787226, guid: c2af55f17a70eaa4685fe3f6ddf0395e,
+        type: 3}
+      propertyPath: m_Text
+      value: 'Rozpocznij
+
+'
+      objectReference: {fileID: 0}
     - target: {fileID: 743869201484502313, guid: c2af55f17a70eaa4685fe3f6ddf0395e,
         type: 3}
       propertyPath: m_UiScaleMode
