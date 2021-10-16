@@ -28,7 +28,7 @@ public class BuildingController : MonoBehaviour
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out hit) && !controller.isAttack)
         {
             target = hit.point;
             position.x = Mathf.Round(target.x / Size) * Size;

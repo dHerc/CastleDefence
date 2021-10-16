@@ -8,7 +8,9 @@ public class Turret : MonoBehaviour
 
 	[Header("Attributes")]
 	public float range = 15f;
-	public float fireRate =1f;
+	public float bulletSpeed = 0.1f;
+	public float fireRate = 1f;
+	public float damage = 5;
 	private float fireCountdown=0f;
 
 	[Header("Unity Setup Fields")]
@@ -77,12 +79,11 @@ public class Turret : MonoBehaviour
 
 	void Shoot()
 	{
-		GameObject bulletGo =(GameObject) Instantiate(bulletPrefab,firePoint.position,firePoint.rotation);
-		Bullet bullet = bulletGo.GetComponent<Bullet>();
-
-		if(bullet != null){
-			bullet.Seek(target);
-		}
-		Debug.Log("SHOOT!");
+		GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+		var direction = target.transform.position - firePoint.position;
+		direction /= Mathf.Max(Mathf.Abs(direction.x), Mathf.Abs(direction.y), Mathf.Abs(direction.z));
+		bullet.GetComponent<Bullet>().damage = damage;
+		bullet.GetComponent<Rigidbody>().velocity = direction*bulletSpeed;
+		bullet.gameObject.transform.rotation = Quaternion.LookRotation(direction);
 	}
 }

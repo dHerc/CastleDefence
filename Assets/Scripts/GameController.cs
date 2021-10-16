@@ -9,7 +9,7 @@ public class GameController : MonoBehaviour
     public EnemyController enemyController;
     public Text textOnButton;
     [SerializeField] private int wallHealth;
-    private int wave;
+    private int wave = 1;
     public bool isAttack;
     public List<Building> buildings;
     public Builder builder;
@@ -74,22 +74,24 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void switchMode()
+    public void StartWave()
     {
-        if(isAttack)
-        {
-            shouldSave = true;
-            isAttack=false;
-            textOnButton.text="Szturm";
-            enemyController.destroyEnemies();
-
-        }
-        else
+        if(!isAttack)
         {
             shouldSave = true;
             isAttack =true;
-            textOnButton.text="Budowa";
-            enemyController.spawnEnemies();
+            textOnButton.text="Fala nr" + wave;
+            GetComponent<DefenceController>().DeselectTowers();
+            GetComponent<EnemyController>().SpawnEnemies(wave);
         }
+    }
+
+    public void EndWave()
+    {
+        wave++;
+        shouldSave = true;
+        isAttack = false;
+        textOnButton.text = "Rozpocznij Szturm";
+        GetComponent<EnemyController>().DestroyEnemies();
     }
 }

@@ -102,12 +102,14 @@ public class DefenceController : MonoBehaviour
                 }
             }
         }
-        if (controller.isAttack)
+       
+    }
+    public void DeselectTowers()
+    {
+        this.building = null;
+        foreach (Building building in controller.buildings)
         {
-            foreach (Building building in controller.buildings)
-            {
-                building.GetComponentInChildren<Renderer>().material.color = color;
-            }
+            building.GetComponentInChildren<Renderer>().material.color = color;
         }
     }
     public void AddDefence(DefenceSave save, GameObject parent)

@@ -277,7 +277,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &455261312 stripped
 MonoBehaviour:
@@ -351,7 +351,7 @@ PrefabInstance:
     - target: {fileID: 743869200156227980, guid: c2af55f17a70eaa4685fe3f6ddf0395e,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: switchMode
+      value: StartWave
       objectReference: {fileID: 0}
     - target: {fileID: 743869200156227980, guid: c2af55f17a70eaa4685fe3f6ddf0395e,
         type: 3}
@@ -651,59 +651,6 @@ MonoBehaviour:
   orthographicSizeMax: 100
   fovMin: 10
   fovMax: 100
---- !u!1 &667858351
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 667858353}
-  - component: {fileID: 667858352}
-  m_Layer: 0
-  m_Name: Enemies
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &667858352
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 667858351}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 973d81fe4e091984faef6b74e0a4a4fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawn: {fileID: 667858351}
-  warriorPrefab: {fileID: 8931008389669797937, guid: c0099e8cac2efea4c94e612c5ec901b6,
-    type: 3}
-  ramPrefab: {fileID: 4178888787830342131, guid: b92e9be3af3dffc41a37435325d7ea62,
-    type: 3}
-  bomberPrefab: {fileID: 7998297266080900267, guid: 794ec753807b6ab489a532a927a8eadc,
-    type: 3}
-  warriorCnt: 3
-  ramCnt: 3
-  bomberCnt: 3
---- !u!4 &667858353
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 667858351}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12.27, y: 10, z: 12}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1247837063
 GameObject:
   m_ObjectHideFlags: 0
@@ -793,6 +740,7 @@ GameObject:
   - component: {fileID: 1910582858}
   - component: {fileID: 1910582859}
   - component: {fileID: 1910582860}
+  - component: {fileID: 1910582861}
   m_Layer: 9
   m_Name: Castle
   m_TagString: Untagged
@@ -808,7 +756,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1910582855}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 10, y: 0, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -863,7 +811,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9ffa84c576e391409fa83ea5aff9090, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyController: {fileID: 667858352}
+  enemyController: {fileID: 0}
   textOnButton: {fileID: 455261312}
   wallHealth: 100
   isAttack: 0
@@ -885,3 +833,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 0}
+--- !u!114 &1910582861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1910582855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 973d81fe4e091984faef6b74e0a4a4fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  warriorPrefab: {fileID: 4265878880635672345, guid: 1a885acee0adc2b4498a83b715d7c015,
+    type: 3}
+  ramPrefab: {fileID: 8964451826104581887, guid: a6d69f55283452240b9524c76845f655,
+    type: 3}
+  bomberPrefab: {fileID: 5328479351375703706, guid: d7d0bbd0ef8f81246a0cd1119999c1a9,
+    type: 3}
+  enemies: []

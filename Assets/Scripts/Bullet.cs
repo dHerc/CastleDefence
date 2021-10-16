@@ -4,41 +4,33 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public Transform target;
-
-    public float speed= 70f;
+    public float damage;
     public GameObject impactEffect;
-
-    public void Seek(Transform _target){
-        target=_target;
-    }
+    private double lifetime = 5;
 
     // Update is called once per frame
     void Update()
     {
-        if(target==null)
-        {
+        lifetime -= Time.deltaTime;
+        if (lifetime < 0)
             Destroy(gameObject);
-            return;
-        }
-
-        Vector3 dir = target.position - transform.position;
-        float distanceThisFrame = speed * Time.deltaTime;
-
-        if(dir.magnitude<=distanceThisFrame)
-        {
-            HitTarget();
-            return;
-        }
-        transform.Translate(dir.normalized*distanceThisFrame,Space.World);
     }
 
-    void HitTarget()
+    private void OnCollisionEnter(Collision collision)
     {
-        GameObject effectInstance = (GameObject )Instantiate(impactEffect,transform.position,transform.rotation);
-        Destroy(effectInstance,2f);
-        Destroy(target.gameObject);
         Destroy(gameObject);
-        Debug.Log("TRAFIONY");
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            HitTarget(collision.gameObject);
+        }
+    }
+
+    void HitTarget(GameObject target)
+    {
+        GameObject effectInstance = (GameObject)Instantiate(impactEffect,transform.position,transform.rotation);
+        var enemy = target.GetComponent<Enemy>();
+        if(enemy)
+            enemy.Hurt(damage);
+        Destroy(effectInstance, 2f);
     }
 }

@@ -40,8 +40,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3408563325005565724}
   - component: {fileID: 13113430349315931}
+  - component: {fileID: 8502509105157424517}
   m_Layer: 0
-  m_Name: ArcherDefence
+  m_Name: Archer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,6 +78,28 @@ MonoBehaviour:
   active: 0
   type: 2
   level: 0
+--- !u!114 &8502509105157424517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3783085021451848090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61a4b9ba3e491bf4ab3570864639bbd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  range: 15
+  bulletSpeed: 5
+  fireRate: 1
+  enemyTag: Enemy
+  partToRotate: {fileID: 7125168179732169916}
+  turnSpeed: 10
+  bulletPrefab: {fileID: 5059807405103475129, guid: ffda51608668e4743a43f595b8f18b0c,
+    type: 3}
+  firePoint: {fileID: 890720032746472804}
 --- !u!1 &8454473700141880550
 GameObject:
   m_ObjectHideFlags: 0
@@ -86,8 +109,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7125168179732169916}
-  - component: {fileID: 4233838939202198607}
-  - component: {fileID: 4082095348857100315}
   m_Layer: 0
   m_Name: Archer
   m_TagString: Untagged
@@ -110,41 +131,6 @@ Transform:
   m_Father: {fileID: 3408563325005565724}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!136 &4233838939202198607
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8454473700141880550}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &4082095348857100315
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8454473700141880550}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61a4b9ba3e491bf4ab3570864639bbd6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  range: 15
-  fireRate: 1
-  enemyTag: Enemy
-  partToRotate: {fileID: 7125168179732169916}
-  turnSpeed: 10
-  bulletPrefab: {fileID: 5059807405103475129, guid: ffda51608668e4743a43f595b8f18b0c,
-    type: 3}
-  firePoint: {fileID: 890720032746472804}
 --- !u!1001 &2266664480888908423
 PrefabInstance:
   m_ObjectHideFlags: 0

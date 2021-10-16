@@ -264,8 +264,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7314317415921415028}
   - component: {fileID: 5555578567527485652}
+  - component: {fileID: 5634889525312196397}
   m_Layer: 0
-  m_Name: TurretDefence
+  m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -301,6 +302,27 @@ MonoBehaviour:
   active: 0
   type: 1
   level: 0
+--- !u!114 &5634889525312196397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8822147539986221436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61a4b9ba3e491bf4ab3570864639bbd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  range: 15
+  fireRate: 1
+  enemyTag: Enemy
+  partToRotate: {fileID: 2484907965775715443}
+  turnSpeed: 10
+  bulletPrefab: {fileID: 1577193553774119268, guid: 13d04577f4946424f9b14ca6f239ab32,
+    type: 3}
+  firePoint: {fileID: 9030015999667215347}
 --- !u!1 &9055854732494254362
 GameObject:
   m_ObjectHideFlags: 0
@@ -310,7 +332,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3638837926667599197}
-  - component: {fileID: 384273366851490758}
   m_Layer: 0
   m_Name: Turret
   m_TagString: Untagged
@@ -334,24 +355,3 @@ Transform:
   m_Father: {fileID: 2484907965775715443}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
---- !u!114 &384273366851490758
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9055854732494254362}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61a4b9ba3e491bf4ab3570864639bbd6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  range: 15
-  fireRate: 1
-  enemyTag: Enemy
-  partToRotate: {fileID: 2484907965775715443}
-  turnSpeed: 10
-  bulletPrefab: {fileID: 1577193553774119268, guid: 13d04577f4946424f9b14ca6f239ab32,
-    type: 3}
-  firePoint: {fileID: 9030015999667215347}
