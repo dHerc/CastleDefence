@@ -24,6 +24,7 @@ public class Builder : MonoBehaviour
         building.layer = 9;
         var data = building.GetComponent<Building>();
         data.maxHealth = maxHealth;
+        data.SetStats();
         data.health = health;
         data.type = type;
         data.level = level;
@@ -41,5 +42,6 @@ public class Builder : MonoBehaviour
         info.inside.transform.parent = parent.transform;
         info.inside.GetComponent<Defence>().type = type;
         info.inside.GetComponent<Defence>().level = level;
+        info.inside.GetComponent<Defence>().SetStats();
     }
 }

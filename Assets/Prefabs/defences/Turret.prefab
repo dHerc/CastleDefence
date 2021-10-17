@@ -301,7 +301,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 0
   type: 1
-  level: 0
+  level: 1
 --- !u!114 &5634889525312196397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -316,7 +316,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   range: 15
+  bulletSpeed: 25
   fireRate: 1
+  damage: 5
   enemyTag: Enemy
   partToRotate: {fileID: 2484907965775715443}
   turnSpeed: 10

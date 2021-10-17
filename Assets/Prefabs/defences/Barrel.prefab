@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7091058828645546367}
   - component: {fileID: 5134198221395421794}
+  - component: {fileID: 4969466364786775459}
   m_Layer: 11
   m_Name: Barrel
   m_TagString: Untagged
@@ -46,7 +47,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 0
   type: 3
-  level: 0
+  level: 1
+--- !u!114 &4969466364786775459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 88430055166544783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de72a5efed25bb345a1cf285ec08fe67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  impactEffect: {fileID: 6241755668306680410, guid: dc6231ea3edb71d40bcb1ce9ea6a14a7,
+    type: 3}
+  tarPrefab: {fileID: 4098709759828155839, guid: 4d0278d9d16aeef4d81fb81addd8a5fa,
+    type: 3}
+  damage: 2
 --- !u!1 &2613265154622452558
 GameObject:
   m_ObjectHideFlags: 0
@@ -135,7 +153,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2992979461421194922}
-  - component: {fileID: 3608113953424533984}
   - component: {fileID: 8418236204890833776}
   m_Layer: 11
   m_Name: Barrel
@@ -159,23 +176,6 @@ Transform:
   m_Father: {fileID: 7091058828645546367}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3608113953424533984
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6194594072592268248}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de72a5efed25bb345a1cf285ec08fe67, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  impactEffect: {fileID: 6241755668306680410, guid: dc6231ea3edb71d40bcb1ce9ea6a14a7,
-    type: 3}
-  tarPrefab: {fileID: 4098709759828155839, guid: 4d0278d9d16aeef4d81fb81addd8a5fa,
-    type: 3}
-  damage: 2
 --- !u!136 &8418236204890833776
 CapsuleCollider:
   m_ObjectHideFlags: 0

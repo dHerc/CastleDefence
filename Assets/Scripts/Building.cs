@@ -16,20 +16,19 @@ public class Building : MonoBehaviour
     public float maxHealth;
     public float health;
     public List<int> wallIds;
+    public BuildingController buildingController;
     // Start is called before the first frame update
     void Start()
     {
         position = gameObject.transform.position;
         rotation = gameObject.transform.rotation;
+        buildingController = FindObjectOfType<BuildingController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (active)
-        {
-            gameObject.transform.position = new Vector3(position.x, position.y - 0.5f + ((health+1)/(maxHealth*2)), position.z);
-        }
+        
     }
 
     public void Destroy(bool first = true)
@@ -60,6 +59,64 @@ public class Building : MonoBehaviour
         GameObject.Destroy(gameObject);
     }
 
+    public void Damage(float damage)
+    {
+        if (active)
+        {
+            health -= damage;
+            if (health <= 0)
+            {
+                active = false;
+                GameObject.Destroy(inside);
+                inside = null;
+                foreach (var renderer in GetComponentsInChildren<Renderer>())
+                {
+                    renderer.enabled = false;
+                }
+                GetComponent<BoxCollider>().enabled = false;
+            }
+        }
+    }
+
+    public void Repair()
+    {
+        if (buildingController.RepairPay(type, level))
+        {
+            health += maxHealth / 10;
+            if (!active)
+            {
+                active = true;
+                foreach (var renderer in GetComponentsInChildren<Renderer>())
+                {
+                    renderer.enabled = true;
+                }
+                GetComponent<BoxCollider>().enabled = true;
+            }
+        }
+    }
+
+    public void Upgrade()
+    {
+        if (buildingController.Pay(type, level))
+        {
+            level++;
+            SetStats();
+        }
+    }
+
+    public void SetStats()
+    {
+        if(type == Types.Tower)
+        {
+            maxHealth = 100 * level;
+            health = maxHealth;
+        }
+        else
+        {
+            maxHealth = 75 * level;
+            health = maxHealth;
+        }
+    }
     public BuildingSave Serialize()
     {
         BuildingSave save = new BuildingSave();

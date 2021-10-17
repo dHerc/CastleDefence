@@ -77,7 +77,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 0
   type: 2
-  level: 0
+  level: 1
 --- !u!114 &8502509105157424517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,6 +94,7 @@ MonoBehaviour:
   range: 15
   bulletSpeed: 5
   fireRate: 1
+  damage: 5
   enemyTag: Enemy
   partToRotate: {fileID: 7125168179732169916}
   turnSpeed: 10

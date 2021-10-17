@@ -40,19 +40,19 @@ public class EnemyController : MonoBehaviour
         SetEnemiesCount(wave);
         for(int i=0; i<warriorCnt; i++)
         {
-            SpawnEnemy(warriorPrefab);
+            SpawnEnemy(warriorPrefab, Enemy.Enemies.Warrior,wave*5,wave,Mathf.Ceil(wave/10f), new Vector3Int(wave,0,0));
         }
         for (int i = 0; i < ramCnt; i++)
         {
-            SpawnEnemy(ramPrefab);
+            SpawnEnemy(ramPrefab, Enemy.Enemies.Ram,wave*10,wave,Mathf.Ceil(wave/25f), new Vector3Int(0, wave*2, 0));
         }
         for (int i = 0; i < bomberCnt; i++)
         {
-            SpawnEnemy(bomberPrefab);
+            SpawnEnemy(bomberPrefab, Enemy.Enemies.Bomber,wave*3,wave*20,Mathf.Ceil(wave/10f), new Vector3Int(0, 0, wave*3));
         }
     }
 
-    private void SpawnEnemy(GameObject prefab)
+    private void SpawnEnemy(GameObject prefab, Enemy.Enemies type, float health, float damage, float speed, Vector3Int loot)
     {
         var side = Random.Range(1, 5);
         var placement = Random.Range(0.5f, 19.5f);
@@ -65,7 +65,17 @@ public class EnemyController : MonoBehaviour
         enemies.Add(enemy.GetComponent<Enemy>());
         var enemyScript = enemy.GetComponent<Enemy>();
         enemyScript.enemyController = this;
+        enemyScript.type = type;
+        enemyScript.health = health;
+        enemyScript.damage = damage;
+        enemyScript.speed = speed;
+        enemyScript.loot = loot;
         enemyScript.target = gameObject.transform;
+    }
+
+    public void AddLoot(Vector3Int loot)
+    {
+        controller.AddLoot(loot);
     }
 
     public void DestroyEnemies()

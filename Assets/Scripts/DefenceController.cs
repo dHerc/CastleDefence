@@ -42,16 +42,21 @@ public class DefenceController : MonoBehaviour
                         if (buildingWall && building.GetComponent<Building>().type == Building.Types.Tower && hit.collider.gameObject.GetComponent<Building>().type == Building.Types.Tower)
                         {
                             var nextBuilding = hit.collider.gameObject;
-                            if (building.transform.position.x == nextBuilding.transform.position.x)
+                            if (GetComponent<BuildingController>().Pay(
+                                (int)(Mathf.Abs(building.transform.position.x - nextBuilding.transform.position.x) +
+                                Mathf.Abs(building.transform.position.z - nextBuilding.transform.position.z)-1)))
                             {
-                                BuildWall(building.transform.position, nextBuilding.transform.position, false);
+                                if (building.transform.position.x == nextBuilding.transform.position.x)
+                                {
+                                    BuildWall(building.transform.position, nextBuilding.transform.position, false);
+                                }
+                                if (building.transform.position.z == nextBuilding.transform.position.z)
+                                {
+                                    BuildWall(building.transform.position, nextBuilding.transform.position, true);
+                                }
+                                building.GetComponent<Building>().wallIds.Add(controller.maxWallId - 1);
+                                nextBuilding.GetComponent<Building>().wallIds.Add(controller.maxWallId - 1);
                             }
-                            if (building.transform.position.z == nextBuilding.transform.position.z)
-                            {
-                                BuildWall(building.transform.position, nextBuilding.transform.position, true);
-                            }
-                            building.GetComponent<Building>().wallIds.Add(controller.maxWallId - 1);
-                            nextBuilding.GetComponent<Building>().wallIds.Add(controller.maxWallId - 1);
                             buildingWall = false;
                             building = null;
                         }
@@ -81,26 +86,22 @@ public class DefenceController : MonoBehaviour
                 {
                     if (Input.GetKeyDown(KeyCode.A))
                     {
-                        controller.builder.AddDefence(turret, building, Defence.Defences.Turret, 1);
+                        if(Pay(Defence.Defences.Turret,1))
+                            controller.builder.AddDefence(turret, building, Defence.Defences.Turret, 1);
                     }
                     if (Input.GetKeyDown(KeyCode.L))
                     {
-                        controller.builder.AddDefence(archer, building, Defence.Defences.Archer, 1);
+                        if (Pay(Defence.Defences.Archer, 1))
+                            controller.builder.AddDefence(archer, building, Defence.Defences.Archer, 1);
                     }
                     if (Input.GetKeyDown(KeyCode.B))
                     {
-                        controller.builder.AddDefence(barrel, building, Defence.Defences.Barrel, 1);
+                        if (Pay(Defence.Defences.Barrel, 1))
+                            controller.builder.AddDefence(barrel, building, Defence.Defences.Barrel, 1);
                     }
                     if (Input.GetKeyDown(KeyCode.W))
                     {
                         buildingWall = true;
-                    }
-                }
-                else
-                {
-                    if (Input.GetKeyDown(KeyCode.T))
-                    {
-                        building.GetComponent<Building>().inside.GetComponent<Defence>().Trigger();
                     }
                 }
             }
@@ -131,6 +132,25 @@ public class DefenceController : MonoBehaviour
         }
     }
 
+    public bool Pay(Defence.Defences type, int level)
+    {
+        var payment = new Vector3Int(0, 0, 0);
+        if(type == Defence.Defences.Archer)
+        {
+            payment.x += (int)Mathf.Pow(level, 1.5f) * 20;
+        }
+        if (type == Defence.Defences.Turret)
+        {
+            payment.x += (int)Mathf.Pow(level, 1.5f) * 10;
+            payment.z += (int)Mathf.Pow(level, 1.5f) * 10;
+        }
+        if (type == Defence.Defences.Barrel)
+        {
+            payment.x += (int)Mathf.Pow(level, 1.5f) * 10;
+            payment.y += (int)Mathf.Pow(level, 1.5f) * 10;
+        }
+        return controller.Pay(payment);
+    }
     public void BuildWall(Vector3 start, Vector3 end, bool alongX)
     {
         var buildingController = GetComponent<BuildingController>();

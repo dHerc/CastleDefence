@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public float health = 25;
-    public int speed = 5;
+    public float health;
+    public float speed;
     public float damage;
+    public Vector3Int loot;
     public Transform target;
+    public enum Enemies {Warrior, Ram, Bomber};
+    public Enemies type;
     private Rigidbody rb;
     public EnemyController enemyController;
 
@@ -28,11 +31,31 @@ public class Enemy : MonoBehaviour
         rb.MovePosition(transform.position + (speed * Time.deltaTime * movement));
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        var building = collision.gameObject;
+        if (building.CompareTag("Building"))
+        {
+            building.GetComponent<Building>().Damage(damage);
+            Vector3 direction = Vector3.Scale(transform.position - building.transform.position, new Vector3(1, 0, 1));
+            var movement = direction.normalized;
+            rb.velocity = movement * 2f;
+        }
+        if (building.CompareTag("Castle"))
+        {
+            building.GetComponentInParent<GameController>().Damage(damage);
+            Vector3 direction = Vector3.Scale(transform.position - building.transform.position, new Vector3(1, 0, 1));
+            var movement = direction.normalized;
+            rb.velocity = movement * 2f;
+        }
+    }
+
     public void Hurt(float damage)
     {
         health -= damage;
         if(health <= 0)
         {
+            enemyController.AddLoot(loot);
             enemyController.enemies.Remove(this);
             Destroy(gameObject);
         }

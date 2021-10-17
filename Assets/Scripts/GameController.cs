@@ -10,6 +10,10 @@ public class GameController : MonoBehaviour
     public Text textOnButton;
     [SerializeField] private int wallHealth;
     private int wave = 1;
+    [SerializeField] private float health = 1000;
+    [SerializeField] private int gold = 100;
+    [SerializeField] private int wood = 100;
+    [SerializeField] private int stone = 100;
     public bool isAttack;
     public List<Building> buildings;
     public Builder builder;
@@ -42,6 +46,14 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public void Damage(float damage)
+    {
+        health -= damage;
+        if(health <= 0)
+        {
+            //end game
+        }
+    }
     public void AddBuilding(Building building)
     {
         buildings.Add(building);
@@ -52,6 +64,9 @@ public class GameController : MonoBehaviour
         Save save = new Save();
         save.wave = wave;
         save.maxWllId = maxWallId;
+        save.gold = gold;
+        save.wood = wood;
+        save.stone = stone;
         foreach(var building in buildings)
         {
             save.buildings.Add(building.Serialize());
@@ -68,6 +83,9 @@ public class GameController : MonoBehaviour
         Save save = JsonUtility.FromJson<Save>(json);
         wave = save.wave;
         maxWallId = save.maxWllId;
+        gold = save.gold;
+        wood = save.wood;
+        stone = save.stone;
         foreach(var building in save.buildings)
         {
             GetComponent<BuildingController>().Build(building);
@@ -83,7 +101,34 @@ public class GameController : MonoBehaviour
             textOnButton.text="Fala nr" + wave;
             GetComponent<DefenceController>().DeselectTowers();
             GetComponent<EnemyController>().SpawnEnemies(wave);
+            foreach (var building in buildings)
+            {
+                //it will turn off colliders for every destroyed building
+                building.Damage(0);
+            }
+
         }
+    }
+
+    public void AddLoot(Vector3Int loot)
+    {
+        gold += loot.x;
+        wood += loot.y;
+        stone += loot.z;
+    }
+
+    public bool Pay(Vector3Int payment)
+    {
+        if (gold < payment.x)
+            return false;
+        if (wood < payment.y)
+            return false;
+        if (stone < payment.z)
+            return false;
+        gold -= payment.x;
+        wood -= payment.y;
+        stone -= payment.z;
+        return true;
     }
 
     public void EndWave()
@@ -93,5 +138,9 @@ public class GameController : MonoBehaviour
         isAttack = false;
         textOnButton.text = "Rozpocznij Szturm";
         GetComponent<EnemyController>().DestroyEnemies();
+        foreach (var building in buildings)
+        {
+            building.gameObject.GetComponent<BoxCollider>().enabled = true;
+        }
     }
 }

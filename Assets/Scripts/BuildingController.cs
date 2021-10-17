@@ -42,7 +42,8 @@ public class BuildingController : MonoBehaviour
                 }
                 else
                 {
-                    controller.builder.Build(TowerPrefab, position, new Vector3(0,0,0), Building.Types.Tower, towerHealth, healthPerLevel, 1);
+                    if(Pay(Building.Types.Tower,1))
+                        controller.builder.Build(TowerPrefab, position, new Vector3(0,0,0), Building.Types.Tower, towerHealth, healthPerLevel, 1);
                 }
                 //wall.transform.rotation = Quaternion.Euler(new Vector3(-90, 0, 0));
                 //wall.transform.position = new Vector3(wall.transform.position.x, 5, wall.transform.position.z);
@@ -73,6 +74,40 @@ public class BuildingController : MonoBehaviour
             GetComponent<DefenceController>().AddDefence(defence, building);
         }
 
+    }
+    public bool Pay(Building.Types type, int level)
+    {
+        var payment = new Vector3Int(0, 0, 0);
+        if(type == Building.Types.Tower)
+        {
+            payment.z += 50 * (int)Mathf.Pow(level, 1.5f);
+        }
+        else
+        {
+            payment.y += 10 * (int)Mathf.Pow(level, 1.5f);
+            payment.z += 10 * (int)Mathf.Pow(level, 1.5f);
+        }
+        return controller.Pay(payment);
+    }
+    public bool RepairPay(Building.Types type, int level)
+    {
+        var payment = new Vector3Int(0, 0, 0);
+        if (type == Building.Types.Tower)
+        {
+            payment.z += 5 * (int)Mathf.Pow(level, 1.5f);
+        }
+        else
+        {
+            payment.y += 1 * (int)Mathf.Pow(level, 1.5f);
+            payment.z += 1 * (int)Mathf.Pow(level, 1.5f);
+        }
+        return controller.Pay(payment);
+    }
+
+    public bool Pay(int wallAmount)
+    {
+        var payment = new Vector3Int(0, wallAmount * 10 * (int)Mathf.Pow(1, 1.5f), wallAmount * 10 *(int)Mathf.Pow(1, 1.5f));
+        return controller.Pay(payment);
     }
 
     public void BuildWall(Vector3 position, Vector3 rotation)
