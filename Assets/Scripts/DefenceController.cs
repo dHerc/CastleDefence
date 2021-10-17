@@ -22,54 +22,57 @@ public class DefenceController : MonoBehaviour
     {
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out hit, float.PositiveInfinity, 1 << 11) && controller.isAttack && Input.GetMouseButtonDown(0))
+        {
+            var barrel = hit.collider.gameObject.GetComponentInChildren<Barrel>();
+            if (barrel)
+                barrel.Trigger();
+        }
 
-        if (Physics.Raycast(ray, out hit, 1 << 9) && !controller.isAttack)
+        if (Physics.Raycast(ray, out hit, float.PositiveInfinity, 1 << 9) && !controller.isAttack)
         {
             if (Input.GetMouseButtonDown(0))
             {
-                if (hit.collider.gameObject.layer == 9)
+                if (building)
                 {
-                    if (building)
+                    if (!building.Equals(hit.collider.gameObject))
                     {
-                        if (!building.Equals(hit.collider.gameObject))
-                        {
-                            building.GetComponentInChildren<Renderer>().material.color = color;
+                        building.GetComponentInChildren<Renderer>().material.color = color;
 
-                            if (buildingWall && building.GetComponent<Building>().type == Building.Types.Tower && hit.collider.gameObject.GetComponent<Building>().type == Building.Types.Tower)
+                        if (buildingWall && building.GetComponent<Building>().type == Building.Types.Tower && hit.collider.gameObject.GetComponent<Building>().type == Building.Types.Tower)
+                        {
+                            var nextBuilding = hit.collider.gameObject;
+                            if (building.transform.position.x == nextBuilding.transform.position.x)
                             {
-                                var nextBuilding = hit.collider.gameObject;
-                                if (building.transform.position.x == nextBuilding.transform.position.x)
-                                {
-                                    BuildWall(building.transform.position, nextBuilding.transform.position, false);
-                                }
-                                if (building.transform.position.z == nextBuilding.transform.position.z)
-                                {
-                                    BuildWall(building.transform.position, nextBuilding.transform.position, true);
-                                }
-                                building.GetComponent<Building>().wallIds.Add(controller.maxWallId - 1);
-                                nextBuilding.GetComponent<Building>().wallIds.Add(controller.maxWallId - 1);
-                                buildingWall = false;
-                                building = null;
+                                BuildWall(building.transform.position, nextBuilding.transform.position, false);
                             }
-                            else
+                            if (building.transform.position.z == nextBuilding.transform.position.z)
                             {
-                                building = hit.collider.gameObject;
-                                building.GetComponentInChildren<Renderer>().material.color = Color.green;
+                                BuildWall(building.transform.position, nextBuilding.transform.position, true);
                             }
+                            building.GetComponent<Building>().wallIds.Add(controller.maxWallId - 1);
+                            nextBuilding.GetComponent<Building>().wallIds.Add(controller.maxWallId - 1);
+                            buildingWall = false;
+                            building = null;
                         }
                         else
                         {
-                            building.GetComponentInChildren<Renderer>().material.color = color;
-                            buildingWall = false;
-                            building = null;
+                            building = hit.collider.gameObject;
+                            building.GetComponentInChildren<Renderer>().material.color = Color.green;
                         }
                     }
                     else
                     {
-                        color = hit.collider.gameObject.GetComponentInChildren<Renderer>().material.color;
-                        building = hit.collider.gameObject;
-                        building.GetComponentInChildren<Renderer>().material.color = Color.green;
+                        building.GetComponentInChildren<Renderer>().material.color = color;
+                        buildingWall = false;
+                        building = null;
                     }
+                }
+                else
+                {
+                    color = hit.collider.gameObject.GetComponentInChildren<Renderer>().material.color;
+                    building = hit.collider.gameObject;
+                    building.GetComponentInChildren<Renderer>().material.color = Color.green;
                 }
             }
             if (building)

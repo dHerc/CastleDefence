@@ -35,4 +35,9 @@ public class Defence : MonoBehaviour
     {
         Debug.Log("triggered");
     }
+
+    public void Remove()
+    {
+        GetComponentInParent<Building>().inside = null;
+    }
 }

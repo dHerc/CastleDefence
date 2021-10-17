@@ -27,10 +27,14 @@ public class Bullet : MonoBehaviour
 
     void HitTarget(GameObject target)
     {
-        GameObject effectInstance = (GameObject)Instantiate(impactEffect,transform.position,transform.rotation);
+        if (impactEffect)
+        {
+            GameObject effectInstance = (GameObject)Instantiate(impactEffect, transform.position, transform.rotation);
+            Destroy(effectInstance, 2f);
+        }
         var enemy = target.GetComponent<Enemy>();
         if(enemy)
             enemy.Hurt(damage);
-        Destroy(effectInstance, 2f);
+        
     }
 }
