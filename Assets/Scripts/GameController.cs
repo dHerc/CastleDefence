@@ -97,7 +97,7 @@ public class GameController : MonoBehaviour
         if(!isAttack)
         {
             shouldSave = true;
-            isAttack =true;
+            isAttack = true;
             textOnButton.text="Fala nr" + wave;
             GetComponent<DefenceController>().DeselectTowers();
             GetComponent<EnemyController>().SpawnEnemies(wave);
@@ -134,6 +134,7 @@ public class GameController : MonoBehaviour
     public void EndWave()
     {
         wave++;
+        AddLoot(new Vector3Int(10, 10, 10));
         shouldSave = true;
         isAttack = false;
         textOnButton.text = "Rozpocznij Szturm";

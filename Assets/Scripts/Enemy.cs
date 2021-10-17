@@ -48,6 +48,8 @@ public class Enemy : MonoBehaviour
             var movement = direction.normalized;
             rb.velocity = movement * 2f;
         }
+        if (type == Enemies.Bomber)
+            Hurt(health + 1);
     }
 
     public void Hurt(float damage)
