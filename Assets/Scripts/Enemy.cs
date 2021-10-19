@@ -13,11 +13,14 @@ public class Enemy : MonoBehaviour
     public Enemies type;
     private Rigidbody rb;
     public EnemyController enemyController;
+    private Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        animator = GetComponentInChildren<Animator>();
+
     }
 
     // Update is called once per frame
@@ -36,6 +39,7 @@ public class Enemy : MonoBehaviour
         var building = collision.gameObject;
         if (building.CompareTag("Building"))
         {
+            animator.SetTrigger("Attack");
             building.GetComponent<Building>().Damage(damage);
             Vector3 direction = Vector3.Scale(transform.position - building.transform.position, new Vector3(1, 0, 1));
             var movement = direction.normalized;
@@ -43,6 +47,7 @@ public class Enemy : MonoBehaviour
         }
         if (building.CompareTag("Castle"))
         {
+            animator.SetTrigger("Attack");
             building.GetComponentInParent<GameController>().Damage(damage);
             Vector3 direction = Vector3.Scale(transform.position - building.transform.position, new Vector3(1, 0, 1));
             var movement = direction.normalized;

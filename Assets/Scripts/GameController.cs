@@ -14,6 +14,11 @@ public class GameController : MonoBehaviour
     [SerializeField] private int gold = 100;
     [SerializeField] private int wood = 100;
     [SerializeField] private int stone = 100;
+    [SerializeField] private Slider healthBar;
+    [SerializeField] private Text healthText;
+    [SerializeField] private Text goldText;
+    [SerializeField] private Text woodText;
+    [SerializeField] private Text stoneText;
     public bool isAttack;
     public List<Building> buildings;
     public Builder builder;
@@ -29,6 +34,8 @@ public class GameController : MonoBehaviour
         builder.controller = this;
         buildings = new List<Building>();
         isAttack=false;
+        UpdateMaterials();
+        UpdateHealth();
     }
 
     // Update is called once per frame
@@ -49,6 +56,7 @@ public class GameController : MonoBehaviour
     public void Damage(float damage)
     {
         health -= damage;
+        UpdateHealth();
         if(health <= 0)
         {
             //end game
@@ -115,6 +123,7 @@ public class GameController : MonoBehaviour
         gold += loot.x;
         wood += loot.y;
         stone += loot.z;
+        UpdateMaterials();
     }
 
     public bool Pay(Vector3Int payment)
@@ -128,6 +137,7 @@ public class GameController : MonoBehaviour
         gold -= payment.x;
         wood -= payment.y;
         stone -= payment.z;
+        UpdateMaterials();
         return true;
     }
 
@@ -143,5 +153,33 @@ public class GameController : MonoBehaviour
         {
             building.gameObject.GetComponent<BoxCollider>().enabled = true;
         }
+    }
+
+    private void UpdateHealth()
+    {
+        healthText.text = health.ToString();
+        healthBar.value = health;
+    }
+
+    private void UpdateWood()
+    {
+        woodText.text = wood.ToString();
+    }
+
+    private void UpdateStone()
+    {
+        stoneText.text = stone.ToString();
+    }
+
+    private void UpdateGold()
+    {
+        goldText.text = gold.ToString();
+    }
+
+    private void UpdateMaterials()
+    {
+        UpdateWood();
+        UpdateStone();
+        UpdateGold();
     }
 }
