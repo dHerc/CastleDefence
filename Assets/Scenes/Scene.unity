@@ -1235,6 +1235,7 @@ MonoBehaviour:
   archer: {fileID: 3783085021451848090, guid: 226f974f1121cd94c9c613362ea27c28, type: 3}
   turret: {fileID: 8822147539986221436, guid: 47adedddd7558584e96a1db82aa12bd7, type: 3}
   barrel: {fileID: 88430055166544783, guid: f600cc1582240794dbf305bb28c5ada2, type: 3}
+  color: {r: 0.20784314, g: 0.20784314, b: 0.20784314, a: 0}
 --- !u!114 &1910582859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1250,10 +1251,9 @@ MonoBehaviour:
   enemyController: {fileID: 0}
   textOnButton: {fileID: 455261312}
   wallHealth: 100
-  health: 100
-  gold: 1000
-  wood: 1000
-  stone: 1000
+  gold: 100
+  wood: 100
+  stone: 100
   healthBar: {fileID: 1804021828}
   healthText: {fileID: 668919061}
   goldText: {fileID: 520808066}

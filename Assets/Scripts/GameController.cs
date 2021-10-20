@@ -10,7 +10,7 @@ public class GameController : MonoBehaviour
     public Text textOnButton;
     [SerializeField] private int wallHealth;
     private int wave = 1;
-    [SerializeField] private float health = 1000;
+    private float health = 100;
     [SerializeField] private int gold = 100;
     [SerializeField] private int wood = 100;
     [SerializeField] private int stone = 100;
@@ -25,6 +25,14 @@ public class GameController : MonoBehaviour
     public bool shouldSave;
     public bool shouldLoad;
     public int maxWallId = 0;
+
+    public float Health { get => health; set { health = value; healthText.text = value.ToString(); } }
+
+    public int Gold { get => gold; set { gold = value; goldText.text = value.ToString(); } }
+    public int Wood { get => wood; set { wood = value; woodText.text = value.ToString(); } }
+    public int Stone { get => stone; set { stone = value; stoneText.text = value.ToString(); } }
+
+    public 
     // Start is called before the first frame update
     void Start()
     {
@@ -34,8 +42,10 @@ public class GameController : MonoBehaviour
         builder.controller = this;
         buildings = new List<Building>();
         isAttack=false;
-        UpdateMaterials();
-        UpdateHealth();
+        healthText.text = health.ToString();
+        goldText.text = health.ToString();
+        woodText.text = health.ToString();
+        stoneText.text = health.ToString();
     }
 
     // Update is called once per frame
@@ -55,9 +65,8 @@ public class GameController : MonoBehaviour
 
     public void Damage(float damage)
     {
-        health -= damage;
-        UpdateHealth();
-        if(health <= 0)
+        Health -= damage;
+        if(Health <= 0)
         {
             //end game
         }
@@ -72,9 +81,9 @@ public class GameController : MonoBehaviour
         Save save = new Save();
         save.wave = wave;
         save.maxWllId = maxWallId;
-        save.gold = gold;
-        save.wood = wood;
-        save.stone = stone;
+        save.gold = Gold;
+        save.wood = Wood;
+        save.stone = Stone;
         foreach(var building in buildings)
         {
             save.buildings.Add(building.Serialize());
@@ -91,9 +100,9 @@ public class GameController : MonoBehaviour
         Save save = JsonUtility.FromJson<Save>(json);
         wave = save.wave;
         maxWallId = save.maxWllId;
-        gold = save.gold;
-        wood = save.wood;
-        stone = save.stone;
+        Gold = save.gold;
+        Wood = save.wood;
+        Stone = save.stone;
         foreach(var building in save.buildings)
         {
             GetComponent<BuildingController>().Build(building);
@@ -120,24 +129,22 @@ public class GameController : MonoBehaviour
 
     public void AddLoot(Vector3Int loot)
     {
-        gold += loot.x;
-        wood += loot.y;
-        stone += loot.z;
-        UpdateMaterials();
+        Gold += loot.x;
+        Wood += loot.y;
+        Stone += loot.z;
     }
 
     public bool Pay(Vector3Int payment)
     {
-        if (gold < payment.x)
+        if (Gold < payment.x)
             return false;
-        if (wood < payment.y)
+        if (Wood < payment.y)
             return false;
-        if (stone < payment.z)
+        if (Stone < payment.z)
             return false;
-        gold -= payment.x;
-        wood -= payment.y;
-        stone -= payment.z;
-        UpdateMaterials();
+        Gold -= payment.x;
+        Wood -= payment.y;
+        Stone -= payment.z;
         return true;
     }
 
@@ -153,33 +160,5 @@ public class GameController : MonoBehaviour
         {
             building.gameObject.GetComponent<BoxCollider>().enabled = true;
         }
-    }
-
-    private void UpdateHealth()
-    {
-        healthText.text = health.ToString();
-        healthBar.value = health;
-    }
-
-    private void UpdateWood()
-    {
-        woodText.text = wood.ToString();
-    }
-
-    private void UpdateStone()
-    {
-        stoneText.text = stone.ToString();
-    }
-
-    private void UpdateGold()
-    {
-        goldText.text = gold.ToString();
-    }
-
-    private void UpdateMaterials()
-    {
-        UpdateWood();
-        UpdateStone();
-        UpdateGold();
     }
 }
