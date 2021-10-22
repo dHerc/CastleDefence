@@ -11,11 +11,13 @@ public class DefenceController : MonoBehaviour
     private Color color;
     private GameObject building;
     private GameController controller;
+    private UIController UIcontroller;
     private bool buildingWall = false;
 
     void Start()
     {
         controller = gameObject.GetComponent<GameController>();
+        UIcontroller = gameObject.GetComponent<UIController>();
     }
 
     void Update()
@@ -28,8 +30,13 @@ public class DefenceController : MonoBehaviour
             if (barrel)
                 barrel.Trigger();
         }
-
-        if (Physics.Raycast(ray, out hit, float.PositiveInfinity, 1 << 9) && !controller.isAttack)
+        else if (Physics.Raycast(ray, out hit, float.PositiveInfinity, 1 << 11) && !controller.isAttack && Input.GetMouseButtonDown(0))
+        {
+            var defence = hit.collider.gameObject.GetComponent<Defence>();
+            if (defence)
+                defence.Upgrade();
+        }
+        else if (Physics.Raycast(ray, out hit, float.PositiveInfinity, 1 << 9) && !controller.isAttack)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -77,29 +84,38 @@ public class DefenceController : MonoBehaviour
                 {
                     color = hit.collider.gameObject.GetComponentInChildren<Renderer>().material.color;
                     building = hit.collider.gameObject;
-                    building.GetComponentInChildren<Renderer>().material.color = Color.green;
+
+                    if(building.GetComponent<Building>().Upgrade())
+                    {
+                        building = null;
+                    }
+                    else
+                    {
+                        building.GetComponentInChildren<Renderer>().material.color = Color.green;
+                    }
                 }
             }
             if (building)
             {
                 if (building.GetComponent<Building>().inside == null)
                 {
-                    if (Input.GetKeyDown(KeyCode.A))
+                    //UIcontroller.showWeapon();
+                    if (UIcontroller.turretClicked)
                     {
                         if(Pay(Defence.Defences.Turret,1))
                             controller.builder.AddDefence(turret, building, Defence.Defences.Turret, 1);
                     }
-                    if (Input.GetKeyDown(KeyCode.L))
+                    if (UIcontroller.archerClicked)
                     {
                         if (Pay(Defence.Defences.Archer, 1))
                             controller.builder.AddDefence(archer, building, Defence.Defences.Archer, 1);
                     }
-                    if (Input.GetKeyDown(KeyCode.B))
+                    if (UIcontroller.barrelClicked)
                     {
                         if (Pay(Defence.Defences.Barrel, 1))
                             controller.builder.AddDefence(barrel, building, Defence.Defences.Barrel, 1);
                     }
-                    if (Input.GetKeyDown(KeyCode.W))
+                    if (UIcontroller.wallClicked)
                     {
                         buildingWall = true;
                     }

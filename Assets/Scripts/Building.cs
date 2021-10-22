@@ -17,12 +17,15 @@ public class Building : MonoBehaviour
     public float health;
     public List<int> wallIds;
     public BuildingController buildingController;
+    private UIController uiController;
+
     // Start is called before the first frame update
     void Start()
     {
         position = gameObject.transform.position;
         rotation = gameObject.transform.rotation;
         buildingController = FindObjectOfType<BuildingController>();
+        uiController = buildingController.gameObject.GetComponent<UIController>();
     }
 
     // Update is called once per frame
@@ -95,13 +98,15 @@ public class Building : MonoBehaviour
         }
     }
 
-    public void Upgrade()
+    public bool Upgrade()
     {
-        if (buildingController.Pay(type, level))
+        if (uiController.upgradeMode && buildingController.Pay(type, level))
         {
             level++;
             SetStats();
+            return true;
         }
+        return false;
     }
 
     public void SetStats()

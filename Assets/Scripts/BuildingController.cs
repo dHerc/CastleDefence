@@ -15,12 +15,14 @@ public class BuildingController : MonoBehaviour
     private Vector3 position;
 
     private GameController controller;
+    private UIController UIcontroller;
 
     public int healthPerLevel;
 
     void Start()
     {
         controller = gameObject.GetComponent<GameController>();
+        UIcontroller = gameObject.GetComponent<UIController>();
     }
 
     void Update()
@@ -42,7 +44,7 @@ public class BuildingController : MonoBehaviour
                 }
                 else
                 {
-                    if(Pay(Building.Types.Tower,1))
+                    if(Pay(Building.Types.Tower,1) && UIcontroller.towerClicked)
                         controller.builder.Build(TowerPrefab, position, new Vector3(0,0,0), Building.Types.Tower, towerHealth, healthPerLevel, 1);
                 }
                 //wall.transform.rotation = Quaternion.Euler(new Vector3(-90, 0, 0));
@@ -112,6 +114,7 @@ public class BuildingController : MonoBehaviour
 
     public void BuildWall(Vector3 position, Vector3 rotation)
     {
+        
         controller.builder.Build(WallPrefab, position, rotation, Building.Types.Wall, healthPerLevel, healthPerLevel, 1).GetComponent<Building>().wallIds.Add(controller.maxWallId);
     }
 }

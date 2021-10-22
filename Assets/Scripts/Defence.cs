@@ -11,11 +11,13 @@ public class Defence : MonoBehaviour
     public Defences type;
     public int level;
     private DefenceController defenceController;
+    private UIController uiController;
 
     // Start is called before the first frame update
     void Start()
     {
         defenceController = FindObjectOfType<DefenceController>();
+        uiController = defenceController.gameObject.GetComponent<UIController>();
     }
 
     // Update is called once per frame
@@ -39,13 +41,15 @@ public class Defence : MonoBehaviour
             barrel.Trigger();
     }
 
-    public void Upgrade()
+    public bool Upgrade()
     {
-        if(defenceController.Pay(type,level))
+        if(uiController.upgradeMode && defenceController.Pay(type,level))
         {
             level++;
             SetStats();
+            return true;
         }
+        return false;
     }
 
     public void SetStats()

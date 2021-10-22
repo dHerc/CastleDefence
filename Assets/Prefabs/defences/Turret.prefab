@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9030015999667215347}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: firePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 6978324874422034982}
   - component: {fileID: 7937141036031736260}
   - component: {fileID: 8015344806264411633}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,7 +121,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6297548325852593481}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -154,7 +154,7 @@ GameObject:
   - component: {fileID: 9052287818646772037}
   - component: {fileID: 4231685894920686022}
   - component: {fileID: 6585903842929901054}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Turret.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -232,7 +232,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2484907965775715443}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RotatingPart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -265,7 +265,8 @@ GameObject:
   - component: {fileID: 7314317415921415028}
   - component: {fileID: 5555578567527485652}
   - component: {fileID: 5634889525312196397}
-  m_Layer: 0
+  - component: {fileID: 2956733281864242840}
+  m_Layer: 11
   m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -325,6 +326,20 @@ MonoBehaviour:
   bulletPrefab: {fileID: 1577193553774119268, guid: 13d04577f4946424f9b14ca6f239ab32,
     type: 3}
   firePoint: {fileID: 9030015999667215347}
+--- !u!136 &2956733281864242840
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8822147539986221436}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.3
+  m_Height: 0.5
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &9055854732494254362
 GameObject:
   m_ObjectHideFlags: 0
@@ -334,7 +349,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3638837926667599197}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}

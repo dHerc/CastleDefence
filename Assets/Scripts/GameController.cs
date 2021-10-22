@@ -11,9 +11,9 @@ public class GameController : MonoBehaviour
     [SerializeField] private int wallHealth;
     private int wave = 1;
     private float health = 100;
-    [SerializeField] private int gold = 100;
-    [SerializeField] private int wood = 100;
-    [SerializeField] private int stone = 100;
+    [SerializeField] private int gold = 1000;
+    [SerializeField] private int wood = 1000;
+    [SerializeField] private int stone = 1000;
     [SerializeField] private Slider healthBar;
     [SerializeField] private Text healthText;
     [SerializeField] private Text goldText;
@@ -25,8 +25,10 @@ public class GameController : MonoBehaviour
     public bool shouldSave;
     public bool shouldLoad;
     public int maxWallId = 0;
+    public Image gameOverImage;
+    public Text gameOverText;
 
-    public float Health { get => health; set { health = value; healthText.text = value.ToString(); } }
+    public float Health { get => health; set { health = value; healthText.text = value.ToString(); healthBar.value = value; } }
 
     public int Gold { get => gold; set { gold = value; goldText.text = value.ToString(); } }
     public int Wood { get => wood; set { wood = value; woodText.text = value.ToString(); } }
@@ -43,9 +45,11 @@ public class GameController : MonoBehaviour
         buildings = new List<Building>();
         isAttack=false;
         healthText.text = health.ToString();
-        goldText.text = health.ToString();
-        woodText.text = health.ToString();
-        stoneText.text = health.ToString();
+        goldText.text = gold.ToString();
+        woodText.text = wood.ToString();
+        stoneText.text = stone.ToString();
+        gameOverImage.enabled = false;
+        gameOverText.enabled = false;
     }
 
     // Update is called once per frame
@@ -68,7 +72,8 @@ public class GameController : MonoBehaviour
         Health -= damage;
         if(Health <= 0)
         {
-            //end game
+            gameOverImage.enabled = true;
+            gameOverText.enabled = true;
         }
     }
     public void AddBuilding(Building building)
