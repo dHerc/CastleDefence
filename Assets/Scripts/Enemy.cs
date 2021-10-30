@@ -14,12 +14,20 @@ public class Enemy : MonoBehaviour
     private Rigidbody rb;
     public EnemyController enemyController;
     private Animator animator;
+    private float damageScale;
+    private Renderer[] enemyRenderers;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>();
+        enemyRenderers = GetComponentsInChildren<Renderer>();
+        foreach (var renderer in enemyRenderers)
+        {
+            renderer.material = new Material(renderer.sharedMaterial);
+            renderer.sharedMaterial.SetFloat("_PermamentDamageScale", 0);
+        }
 
     }
 
@@ -32,6 +40,14 @@ public class Enemy : MonoBehaviour
         rb.rotation = Quaternion.Euler(Vector3.Scale(lookRotation, Vector3.up));
         var movement = direction.normalized;
         rb.MovePosition(transform.position + (speed * Time.deltaTime * movement));
+        if (damageScale > 0f)
+        {
+            foreach (var renderer in enemyRenderers)
+            {
+                renderer.sharedMaterial.SetFloat("_TemporaryDamageScale", damageScale);
+                damageScale -= 0.05f;
+            }
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -67,6 +83,17 @@ public class Enemy : MonoBehaviour
             enemyController.AddLoot(loot);
             enemyController.enemies.Remove(this);
             Destroy(gameObject);
+        }
+        else
+        {
+            foreach (var renderer in enemyRenderers)
+            {
+                if (renderer)
+                {
+                    renderer.sharedMaterial.SetFloat("_PermamentDamageScale", 1f - (health / 100));
+                    damageScale = 1f;
+                }
+            }
         }
     }
 }

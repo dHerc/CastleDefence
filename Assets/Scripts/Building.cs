@@ -12,12 +12,14 @@ public class Building : MonoBehaviour
     public enum Types { Tower, Wall, Gate};
     public Types type;
     public GameObject inside = null;
-    public int level;
+    public int level = 1;
     public float maxHealth;
     public float health;
     public List<int> wallIds;
     public BuildingController buildingController;
     private UIController uiController;
+    private float damageScale;
+    private Renderer buildingRenderer;
 
     // Start is called before the first frame update
     void Start()
@@ -26,12 +28,18 @@ public class Building : MonoBehaviour
         rotation = gameObject.transform.rotation;
         buildingController = FindObjectOfType<BuildingController>();
         uiController = buildingController.gameObject.GetComponent<UIController>();
+        buildingRenderer = GetComponentInChildren<Renderer>();
+        buildingRenderer.sharedMaterial.SetFloat("_PermamentDamageScale", 0);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (damageScale > 0f)
+        {
+            buildingRenderer.sharedMaterial.SetFloat("_TemporaryDamageScale", damageScale);
+            damageScale -= 0.05f;
+        }
     }
 
     public void Destroy(bool first = true)
@@ -77,6 +85,11 @@ public class Building : MonoBehaviour
                     renderer.enabled = false;
                 }
                 GetComponent<BoxCollider>().enabled = false;
+            }
+            else
+            {
+                buildingRenderer.sharedMaterial.SetFloat("_PermamentDamageScale", 1f - (health / maxHealth));
+                damageScale = 1f;
             }
         }
     }

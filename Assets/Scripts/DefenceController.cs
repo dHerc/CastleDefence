@@ -8,7 +8,7 @@ public class DefenceController : MonoBehaviour
     [SerializeField] private GameObject turret;
     [SerializeField] private GameObject barrel;
 
-    private Color color;
+    private Color color = new Color(106f/255f,106f/255f,106f/255f);
     private GameObject building;
     private GameController controller;
     private UIController UIcontroller;

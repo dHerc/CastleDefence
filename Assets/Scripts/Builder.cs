@@ -24,10 +24,10 @@ public class Builder : MonoBehaviour
         building.layer = 9;
         var data = building.GetComponent<Building>();
         data.maxHealth = maxHealth;
-        data.SetStats();
         data.health = health;
         data.type = type;
         data.level = level;
+        data.SetStats();
         data.active = true;
         controller.AddBuilding(data);
         return building;

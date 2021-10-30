@@ -27,6 +27,8 @@ public class GameController : MonoBehaviour
     public int maxWallId = 0;
     public Image gameOverImage;
     public Text gameOverText;
+    private float damageScale;
+    private Renderer castleRenderer;
 
     public float Health { get => health; set { health = value; healthText.text = value.ToString(); healthBar.value = value; } }
 
@@ -50,6 +52,8 @@ public class GameController : MonoBehaviour
         stoneText.text = stone.ToString();
         gameOverImage.enabled = false;
         gameOverText.enabled = false;
+        castleRenderer = GetComponentInChildren<Renderer>();
+        castleRenderer.sharedMaterial.SetFloat("_PermamentDamageScale", 0);
     }
 
     // Update is called once per frame
@@ -65,6 +69,11 @@ public class GameController : MonoBehaviour
             Load();
             shouldLoad = false;
         }
+        if(damageScale > 0f)
+        {
+            castleRenderer.sharedMaterial.SetFloat("_TemporaryDamageScale", damageScale);
+            damageScale -= 0.05f;
+        }
     }
 
     public void Damage(float damage)
@@ -74,6 +83,11 @@ public class GameController : MonoBehaviour
         {
             gameOverImage.enabled = true;
             gameOverText.enabled = true;
+        }
+        else
+        {
+            castleRenderer.sharedMaterial.SetFloat("_PermamentDamageScale", 1f - (health / 100));
+            damageScale = 1f;
         }
     }
     public void AddBuilding(Building building)
