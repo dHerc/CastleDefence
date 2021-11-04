@@ -145,6 +145,7 @@ MonoBehaviour:
   maxHealth: 0
   health: 0
   wallIds: 
+  buildingController: {fileID: 0}
 --- !u!1 &7873961812813701092
 GameObject:
   m_ObjectHideFlags: 0
@@ -156,7 +157,7 @@ GameObject:
   - component: {fileID: 1122881016771094365}
   - component: {fileID: 2546790446258864282}
   - component: {fileID: 9195244823302488979}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}

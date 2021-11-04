@@ -9,7 +9,7 @@ public class DefenceController : MonoBehaviour
     [SerializeField] private GameObject barrel;
 
     private Color color = new Color(106f/255f,106f/255f,106f/255f);
-    private GameObject building;
+    public GameObject building;
     private GameController controller;
     private UIController UIcontroller;
     private bool buildingWall = false;
@@ -44,7 +44,8 @@ public class DefenceController : MonoBehaviour
                 {
                     if (!building.Equals(hit.collider.gameObject))
                     {
-                        building.GetComponentInChildren<Renderer>().material.color = color;
+                        //building.GetComponentInChildren<Renderer>().material.color = color;
+                        building.GetComponent<Building>().Dselect();
 
                         if (buildingWall && building.GetComponent<Building>().type == Building.Types.Tower && hit.collider.gameObject.GetComponent<Building>().type == Building.Types.Tower)
                         {
@@ -70,12 +71,15 @@ public class DefenceController : MonoBehaviour
                         else
                         {
                             building = hit.collider.gameObject;
-                            building.GetComponentInChildren<Renderer>().material.color = Color.green;
+                            //building.GetComponentInChildren<Renderer>().material.color = Color.green;
+                            building.GetComponent<Building>().Select();
                         }
                     }
                     else
                     {
-                        building.GetComponentInChildren<Renderer>().material.color = color;
+                        //building.GetComponentInChildren<Renderer>().material.color = color;
+                        building.GetComponent<Building>().Dselect();
+
                         buildingWall = false;
                         building = null;
                     }
@@ -91,7 +95,8 @@ public class DefenceController : MonoBehaviour
                     }
                     else
                     {
-                        building.GetComponentInChildren<Renderer>().material.color = Color.green;
+                        //building.GetComponentInChildren<Renderer>().material.color = Color.green;
+                        building.GetComponent<Building>().Select();
                     }
                 }
             }
@@ -129,7 +134,8 @@ public class DefenceController : MonoBehaviour
         this.building = null;
         foreach (Building building in controller.buildings)
         {
-            building.GetComponentInChildren<Renderer>().material.color = color;
+            //building.GetComponentInChildren<Renderer>().material.color = color;
+            building.GetComponent<Building>().Dselect();
         }
     }
     public void AddDefence(DefenceSave save, GameObject parent)
