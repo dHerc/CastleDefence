@@ -1258,6 +1258,7 @@ GameObject:
   - component: {fileID: 534669904}
   - component: {fileID: 534669903}
   - component: {fileID: 534669906}
+  - component: {fileID: 534669907}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1347,6 +1348,21 @@ MonoBehaviour:
   orthographicSizeMax: 100
   fovMin: 10
   fovMax: 100
+--- !u!114 &534669907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 534669902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26a54027a9a7ad04b840e09d44239718, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DrawAsSolidColor: {fileID: 4800000, guid: 883a1a4e0e7989243a32624f42349b2b, type: 3}
+  OutlineShader: {fileID: 4800000, guid: 5da5e4a40fd7ff24383e2fb702f457cb, type: 3}
+  color: {r: 1, g: 0.41671377, b: 0, a: 0}
 --- !u!1 &536562069
 GameObject:
   m_ObjectHideFlags: 0
@@ -2890,6 +2906,7 @@ MonoBehaviour:
   archer: {fileID: 3783085021451848090, guid: 226f974f1121cd94c9c613362ea27c28, type: 3}
   turret: {fileID: 8822147539986221436, guid: 47adedddd7558584e96a1db82aa12bd7, type: 3}
   barrel: {fileID: 88430055166544783, guid: f600cc1582240794dbf305bb28c5ada2, type: 3}
+  building: {fileID: 0}
 --- !u!114 &1910582859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3063,7 +3080,7 @@ PrefabInstance:
     - target: {fileID: 5930354855051594889, guid: 4e4da7cae3fc6744e8deba559924ee80,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5930354855051594889, guid: 4e4da7cae3fc6744e8deba559924ee80,
         type: 3}
@@ -3093,7 +3110,7 @@ PrefabInstance:
     - target: {fileID: 5930354855051594889, guid: 4e4da7cae3fc6744e8deba559924ee80,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5930354855051594889, guid: 4e4da7cae3fc6744e8deba559924ee80,
         type: 3}
