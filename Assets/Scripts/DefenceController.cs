@@ -24,19 +24,19 @@ public class DefenceController : MonoBehaviour
     {
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out hit, float.PositiveInfinity, 1 << 11) && controller.isAttack && Input.GetMouseButtonDown(0))
+        if (Physics.Raycast(ray, out hit, float.PositiveInfinity, 1 << LayerMask.NameToLayer("Defences")) && controller.isAttack && Input.GetMouseButtonDown(0))
         {
             var barrel = hit.collider.gameObject.GetComponentInChildren<Barrel>();
             if (barrel)
                 barrel.Trigger();
         }
-        else if (Physics.Raycast(ray, out hit, float.PositiveInfinity, 1 << 11) && !controller.isAttack && Input.GetMouseButtonDown(0))
+        else if (Physics.Raycast(ray, out hit, float.PositiveInfinity, 1 << LayerMask.NameToLayer("Defences")) && !controller.isAttack && Input.GetMouseButtonDown(0))
         {
             var defence = hit.collider.gameObject.GetComponent<Defence>();
             if (defence)
                 defence.Upgrade();
         }
-        else if (Physics.Raycast(ray, out hit, float.PositiveInfinity, 1 << 9) && !controller.isAttack)
+        else if (Physics.Raycast(ray, out hit, float.PositiveInfinity, LayerMask.GetMask("Buildings","Outline")) && !controller.isAttack)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -44,8 +44,7 @@ public class DefenceController : MonoBehaviour
                 {
                     if (!building.Equals(hit.collider.gameObject))
                     {
-                        //building.GetComponentInChildren<Renderer>().material.color = color;
-                        building.GetComponent<Building>().Dselect();
+                        building.GetComponent<Building>().Deselect();
 
                         if (buildingWall && building.GetComponent<Building>().type == Building.Types.Tower && hit.collider.gameObject.GetComponent<Building>().type == Building.Types.Tower)
                         {
@@ -71,14 +70,12 @@ public class DefenceController : MonoBehaviour
                         else
                         {
                             building = hit.collider.gameObject;
-                            //building.GetComponentInChildren<Renderer>().material.color = Color.green;
                             building.GetComponent<Building>().Select();
                         }
                     }
                     else
                     {
-                        //building.GetComponentInChildren<Renderer>().material.color = color;
-                        building.GetComponent<Building>().Dselect();
+                        building.GetComponent<Building>().Deselect();
 
                         buildingWall = false;
                         building = null;
@@ -86,7 +83,6 @@ public class DefenceController : MonoBehaviour
                 }
                 else
                 {
-                    color = hit.collider.gameObject.GetComponentInChildren<Renderer>().material.color;
                     building = hit.collider.gameObject;
 
                     if(building.GetComponent<Building>().Upgrade())
@@ -95,7 +91,6 @@ public class DefenceController : MonoBehaviour
                     }
                     else
                     {
-                        //building.GetComponentInChildren<Renderer>().material.color = Color.green;
                         building.GetComponent<Building>().Select();
                     }
                 }
@@ -134,8 +129,7 @@ public class DefenceController : MonoBehaviour
         this.building = null;
         foreach (Building building in controller.buildings)
         {
-            //building.GetComponentInChildren<Renderer>().material.color = color;
-            building.GetComponent<Building>().Dselect();
+            building.GetComponent<Building>().Deselect();
         }
     }
     public void AddDefence(DefenceSave save, GameObject parent)

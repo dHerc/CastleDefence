@@ -161,7 +161,7 @@ public class Building : MonoBehaviour
         }
     }
 
-    public void Dselect()
+    public void Deselect()
     {
         var children = GetComponentsInChildren<Transform>();
         foreach (var child in children)

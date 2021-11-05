@@ -11,7 +11,7 @@ public class Turret : MonoBehaviour
 	public float bulletSpeed;
 	public float fireRate = 1f;
 	public float damage = 5;
-	private float fireCountdown=0f;
+	protected float fireCountdown=0f;
 
 	[Header("Unity Setup Fields")]
 	public string enemyTag="Enemy";
@@ -26,7 +26,7 @@ public class Turret : MonoBehaviour
 
 
 	// Use this for initialization
-	void Start () {
+	protected void Start () {
 	InvokeRepeating("UpdateTarget",0f,0.5f);
 	}
 
@@ -54,9 +54,9 @@ public class Turret : MonoBehaviour
 		}
 	}
 
-	
+
 	// Update is called once per frame
-	void Update () {
+	protected void Update () {
 		if(target == null) return;
 
 		Vector3 dir = target.position - transform.position;
@@ -77,7 +77,7 @@ public class Turret : MonoBehaviour
 		fireCountdown-=Time.deltaTime;
 	}
 
-	void Shoot()
+	protected void Shoot()
 	{
 		GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
 		var direction = target.transform.position - firePoint.position;

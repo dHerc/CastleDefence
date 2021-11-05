@@ -56,7 +56,7 @@ public class Defence : MonoBehaviour
     {
         if(type == Defences.Archer)
         {
-            var script = GetComponent<Turret>();
+            var script = GetComponent<Archer>();
             script.damage = level * 5;
             script.fireRate = Mathf.Pow(1.2f, level);
             script.range = 10 * Mathf.Pow(1.2f, level);

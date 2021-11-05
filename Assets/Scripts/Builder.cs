@@ -36,7 +36,7 @@ public class Builder : MonoBehaviour
     {
         var info = parent.GetComponent<Building>();
         var size = parent.GetComponent<Collider>().bounds.size;
-        var top = parent.transform.position.y + size.y / 2 + 0.1f;
+        var top = parent.transform.position.y + size.y - 0.1f;
         var position = new Vector3(parent.transform.position.x, top, parent.transform.position.z);
         info.inside = Instantiate(prefab, position, Quaternion.identity);
         info.inside.transform.parent = parent.transform;
