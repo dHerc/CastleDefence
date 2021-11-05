@@ -830,7 +830,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3946458677386244122}
-  m_LocalRotation: {x: 0.015081089, y: 0.24360017, z: 0.037614617, w: 0.9690287}
+  m_LocalRotation: {x: 0.01508109, y: 0.24360017, z: 0.03761462, w: 0.9690287}
   m_LocalPosition: {x: -4.3122443e-11, y: 0.27292505, z: -1.4697719e-11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1110,7 +1110,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5324310010572769245}
-  m_LocalRotation: {x: 0.38922456, y: -0.40067255, z: 0.08839186, w: 0.82471365}
+  m_LocalRotation: {x: 0.3892246, y: -0.40067255, z: 0.08839187, w: 0.82471365}
   m_LocalPosition: {x: 1.6436384e-10, y: 0.15098533, z: -0.0000000011683988}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1615,7 +1615,7 @@ GameObject:
   - component: {fileID: 6868723460831386606}
   - component: {fileID: 3591788214491002516}
   m_Layer: 0
-  m_Name: Bomber 1
+  m_Name: BomberModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1630,7 +1630,7 @@ Transform:
   m_GameObject: {fileID: 7568794231467796989}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children:
   - {fileID: 668914889113925025}
   - {fileID: 72756631020540820}
@@ -1647,7 +1647,7 @@ Animator:
   m_GameObject: {fileID: 7568794231467796989}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 74b729735ba8b6a43a4d05914c3d8444, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 405038de7b26ed646b4be66c558957f8, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1

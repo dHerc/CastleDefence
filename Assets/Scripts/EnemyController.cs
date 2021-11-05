@@ -42,6 +42,7 @@ public class EnemyController : MonoBehaviour
         {
             SpawnEnemy(warriorPrefab, Enemy.Enemies.Warrior,wave*5,wave,Mathf.Ceil(wave/10f), new Vector3Int(wave,0,0));
             SpawnEnemy(bomberPrefab, Enemy.Enemies.Bomber, wave * 5, wave * 5, Mathf.Ceil(wave / 10f), new Vector3Int(wave, 0, 0));
+            SpawnEnemy(ramPrefab, Enemy.Enemies.Ram, wave * 10, wave, Mathf.Ceil(wave / 25f), new Vector3Int(0, wave * 2, 0));
         }
         for (int i = 0; i < ramCnt; i++)
         {
