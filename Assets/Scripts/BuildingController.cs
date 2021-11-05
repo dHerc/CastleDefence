@@ -38,7 +38,7 @@ public class BuildingController : MonoBehaviour
             position.z = Mathf.Round(target.z / Size) * Size;
             if (Input.GetMouseButtonDown(1))
             {
-                if (hit.collider.gameObject.layer == 9)
+                if (hit.collider.gameObject.layer == 9 || hit.collider.gameObject.layer == 12)
                 {
                     hit.collider.gameObject.GetComponent<Building>().Destroy();
                 }

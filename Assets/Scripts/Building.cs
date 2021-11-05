@@ -150,4 +150,24 @@ public class Building : MonoBehaviour
         save.wallIds = wallIds;
         return save;
     }
+
+    public void Select()
+    {
+        var children = GetComponentsInChildren<Transform>();
+        foreach(var child in children)
+        {
+            if(child.gameObject.layer == LayerMask.NameToLayer("Buildings"))
+                child.gameObject.layer = LayerMask.NameToLayer("Outline");
+        }
+    }
+
+    public void Dselect()
+    {
+        var children = GetComponentsInChildren<Transform>();
+        foreach (var child in children)
+        {
+            if (child.gameObject.layer == LayerMask.NameToLayer("Outline"))
+                child.gameObject.layer = LayerMask.NameToLayer("Buildings");
+        }
+    }
 }
