@@ -79,6 +79,8 @@ MonoBehaviour:
   active: 0
   type: 2
   level: 1
+  upgradeParticlePrefab: {fileID: 6081968157119482141, guid: 0e6d8720acddb7441bc0094a27bf8aa3,
+    type: 3}
 --- !u!114 &8502509105157424517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,7 +103,11 @@ MonoBehaviour:
   turnSpeed: 10
   bulletPrefab: {fileID: 5059807405103475129, guid: ffda51608668e4743a43f595b8f18b0c,
     type: 3}
+  fireParticle: {fileID: 4060337267061144578, guid: 7b60418abf60dbd4fb801a614d8758e8,
+    type: 3}
   firePoint: {fileID: 890720032746472804}
+  yFireOffset: 1.5
+  zFireOffset: 0.5
 --- !u!136 &4579682205225836589
 CapsuleCollider:
   m_ObjectHideFlags: 0

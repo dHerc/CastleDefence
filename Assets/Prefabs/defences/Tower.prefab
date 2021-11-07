@@ -65,6 +65,9 @@ MonoBehaviour:
   maxHealth: 0
   health: 0
   wallIds: 
+  buildingController: {fileID: 0}
+  upgradeParticlePrefab: {fileID: 6081968157119482141, guid: 0e6d8720acddb7441bc0094a27bf8aa3,
+    type: 3}
 --- !u!1 &5309849943213492457
 GameObject:
   m_ObjectHideFlags: 0

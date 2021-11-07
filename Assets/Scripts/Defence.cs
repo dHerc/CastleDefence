@@ -12,6 +12,7 @@ public class Defence : MonoBehaviour
     public int level;
     private DefenceController defenceController;
     private UIController uiController;
+    public GameObject upgradeParticlePrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -47,6 +48,7 @@ public class Defence : MonoBehaviour
         {
             level++;
             SetStats();
+            Instantiate(upgradeParticlePrefab, transform).transform.localPosition = new Vector3(0, 2, 0);
             return true;
         }
         return false;

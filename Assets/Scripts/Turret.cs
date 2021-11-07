@@ -21,7 +21,11 @@ public class Turret : MonoBehaviour
 	public float turnSpeed = 10f;
 
 	public GameObject bulletPrefab;
+	public GameObject fireParticle;
 	public Transform firePoint;
+
+	public float yFireOffset;
+	public float zFireOffset;
 
 
 
@@ -85,5 +89,6 @@ public class Turret : MonoBehaviour
 		bullet.GetComponent<Bullet>().damage = damage;
 		bullet.GetComponent<Rigidbody>().velocity = direction*bulletSpeed;
 		bullet.gameObject.transform.rotation = Quaternion.LookRotation(direction);
+		Instantiate(fireParticle, transform.GetChild(0).transform).transform.localPosition = new Vector3(0,yFireOffset,zFireOffset);
 	}
 }

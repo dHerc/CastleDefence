@@ -20,6 +20,7 @@ public class Building : MonoBehaviour
     private UIController uiController;
     private float damageScale;
     private Renderer buildingRenderer;
+    public GameObject upgradeParticlePrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -117,6 +118,7 @@ public class Building : MonoBehaviour
         {
             level++;
             SetStats();
+            Instantiate(upgradeParticlePrefab, transform).transform.localPosition = new Vector3(0, 2, 0);
             return true;
         }
         return false;
