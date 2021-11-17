@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3408563325005565724}
   - component: {fileID: 13113430349315931}
+  - component: {fileID: 6792719744581784860}
   - component: {fileID: 4579682205225836589}
-  - component: {fileID: -4798715750267035019}
   - component: {fileID: 5570406681403562207}
   m_Layer: 11
   m_Name: Archer
@@ -50,6 +50,35 @@ MonoBehaviour:
   active: 0
   type: 2
   level: 1
+  upgradeParticlePrefab: {fileID: 6081968157119482141, guid: 0e6d8720acddb7441bc0094a27bf8aa3,
+    type: 3}
+--- !u!114 &6792719744581784860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3783085021451848090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd70bbb67d15e3a49963d9520f9b2643, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  range: 15
+  bulletSpeed: 0
+  fireRate: 1
+  damage: 5
+  enemyTag: Enemy
+  partToRotate: {fileID: 7125168179732169916}
+  turnSpeed: 10
+  bulletPrefab: {fileID: 5059807405103475129, guid: ffda51608668e4743a43f595b8f18b0c,
+    type: 3}
+  fireParticle: {fileID: 4060337267061144578, guid: 7b60418abf60dbd4fb801a614d8758e8,
+    type: 3}
+  firePoint: {fileID: 5729913308853768301}
+  yFireOffset: 0
+  zFireOffset: 0
 --- !u!136 &4579682205225836589
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -64,29 +93,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0.8, z: 0}
---- !u!114 &-4798715750267035019
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3783085021451848090}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd70bbb67d15e3a49963d9520f9b2643, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  range: 15
-  bulletSpeed: 5
-  fireRate: 1
-  damage: 5
-  enemyTag: Enemy
-  partToRotate: {fileID: 3408563325005565724}
-  turnSpeed: 10
-  bulletPrefab: {fileID: 5059807405103475129, guid: ffda51608668e4743a43f595b8f18b0c,
-    type: 3}
-  firePoint: {fileID: 327229630721308031}
 --- !u!95 &5570406681403562207
 Animator:
   serializedVersion: 3
@@ -227,9 +233,9 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8339027480587953175}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &327229630721308031 stripped
+--- !u!4 &5729913308853768301 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: -634830722388307608, guid: 6a186f57e19b1c547b987e26c295038e,
+  m_CorrespondingSourceObject: {fileID: 4341065987587142778, guid: 6a186f57e19b1c547b987e26c295038e,
     type: 3}
   m_PrefabInstance: {fileID: 8339027480587953175}
   m_PrefabAsset: {fileID: 0}

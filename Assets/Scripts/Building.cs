@@ -30,6 +30,7 @@ public class Building : MonoBehaviour
         buildingController = FindObjectOfType<BuildingController>();
         uiController = buildingController.gameObject.GetComponent<UIController>();
         buildingRenderer = GetComponentInChildren<Renderer>();
+        buildingRenderer.material = new Material(buildingRenderer.sharedMaterial);
         buildingRenderer.sharedMaterial.SetFloat("_PermamentDamageScale", 0);
     }
 
