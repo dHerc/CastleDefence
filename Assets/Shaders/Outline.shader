@@ -1,10 +1,10 @@
-﻿Shader "Custom/Post Outline"
+﻿Shader "Custom/Outline"
 {
     Properties
     {
-        _MainTex("Main Texture",2D)="black"{}
-        _SceneTex("Scene Texture",2D)="black"{}
-        _Color("Color",Color)=(0.5,0,0,1)
+        _MainTex("Main Texture",2D) = "black"{}
+        _SceneTex("Scene Texture",2D) = "black"{}
+        _Color("Color",Color)=(0.5, 0, 0, 1)
     }
     SubShader 
     {
@@ -38,33 +38,34 @@
                           
             half4 frag(v2f i) : COLOR 
             {                
-                if(tex2D(_MainTex,i.uvs.xy).r>0)
+                if(tex2D(_MainTex,i.uvs.xy).r > 0)
                 {
                     return tex2D(_SceneTex,i.uvs.xy);
                 }
-                int NumberOfIterations=19;
+
+                int NumberOfIterations = 20;
  
                 float TX_x = _MainTex_TexelSize.x;
                 float TX_y = _MainTex_TexelSize.y;
  
-                float ColorIntensityInRadius=0;
+                float ColorIntensity = 0;
  
-                for(int k=0; k < NumberOfIterations; k++)
+                for(int j = 0; j < NumberOfIterations; j++)
                 {
-                    for(int j=0; j < NumberOfIterations; j++)
+                    for(int k = 0; k < NumberOfIterations; k++)
                     {
-                        ColorIntensityInRadius += tex2D(_MainTex,i.uvs.xy + float2 ((k-NumberOfIterations/2)*TX_x, (j-NumberOfIterations/2)*TX_y)).r;
+                        ColorIntensity += tex2D(_MainTex, i.uvs.xy + float2((j - NumberOfIterations / 2) * TX_x, (k - NumberOfIterations / 2) * TX_y)).r;
                     }
                 }
-                ColorIntensityInRadius *= 0.01;
+                
+                ColorIntensity *= 0.01;
  
-                half4 color = tex2D(_SceneTex,i.uvs.xy) + ColorIntensityInRadius * _Color;
+                half4 color = tex2D(_SceneTex,i.uvs.xy) + ColorIntensity * _Color;
 
                 return color;
             }
-             
+
             ENDCG
- 
         }      
     }
 }

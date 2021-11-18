@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Outline : MonoBehaviour
 {
-	public Shader DrawAsSolidColor;
 	public Shader OutlineShader;
 	Material outlineMaterial;
 	public Color color;
@@ -24,10 +23,8 @@ public class Outline : MonoBehaviour
 
 		cam.cullingMask = 1 << LayerMask.NameToLayer("Outline");
 
-		var rt = RenderTexture.GetTemporary(src.width, src.height);
+		var rt = RenderTexture.GetTemporary(src.width, src.height, 0, RenderTextureFormat.R8);
 		cam.targetTexture = rt;
-
-		//cam.RenderWithShader(DrawAsSolidColor, "");
 
 		outlineMaterial.SetTexture("_SceneTex", src);
 		outlineMaterial.SetColor("_Color", color);

@@ -9,7 +9,7 @@ public class Archer : Turret
     private  void Start()
     {
         base.Start();
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     private void Update()
